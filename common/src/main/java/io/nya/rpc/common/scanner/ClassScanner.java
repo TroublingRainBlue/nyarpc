@@ -1,7 +1,6 @@
 package io.nya.rpc.common.scanner;
 
 import java.io.File;
-import java.io.FileFilter;
 import java.io.IOException;
 import java.net.JarURLConnection;
 import java.net.URL;
@@ -49,13 +48,8 @@ public class ClassScanner {
         }
 
         // 如果存在，扫描包下所有文件
-        File[] dirfiles = dir.listFiles(new FileFilter() {
-            // 自定义过滤规则
-            @Override
-            public boolean accept(File file) {
-                return (recursive && file.isDirectory() || file.getName().endsWith(".class"));
-            }
-        });
+        // 自定义过滤规则
+        File[] dirfiles = dir.listFiles(file -> (recursive && file.isDirectory() || file.getName().endsWith(".class")));
 
         // 遍历所有文件
         if (dirfiles != null) {
@@ -115,7 +109,7 @@ public class ClassScanner {
     }
 
     public static List<String> getClassNameList(String packageName) throws IOException {
-        List<String> classNameList = new ArrayList<String>();
+        List<String> classNameList = new ArrayList<>();
 
         boolean recursive = true;
 
