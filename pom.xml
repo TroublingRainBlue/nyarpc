@@ -10,6 +10,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>nyarpc-annotation</module>
+        <module>common</module>
     </modules>
 
     <properties>
