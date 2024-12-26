@@ -35,18 +35,27 @@ public class RpcServiceScanner extends ClassScanner {
                 if (rpcService != null) {
                     // 优先使用interfaceClass,interfaceClass的name为空，再使用interfaceClassName
                     // TODO 向注册中心注册服务元数据，同时handlerMap标记RpcService注解标注的实例
-
+                    String serviceName = getServiceName(rpcService);
+                    String key = serviceName + rpcService.version() + rpcService.group();
+                    handlerMap.put(key, clazz.newInstance());
+                    /*
                     LOGGER.info("当前标注了@RpcService注解的类实例名称===>>>{}", clazz.getName());
                     LOGGER.info("@RpcService注解上标注的信息如下：");
                     LOGGER.info("interfaceClass===>>>{}", rpcService.interfaceClass().getName());
                     LOGGER.info("interfaceClassName===>>>{}", rpcService.interfaceClassName());
                     LOGGER.info("version===>>>{}", rpcService.version());
                     LOGGER.info("group===>>>{}", rpcService.group());
+                    */
+
                 }
             } catch (Exception e) {
                 LOGGER.error("Scan classes throws exception===>>{}", e.toString());
             }
         }
         return handlerMap;
+    }
+
+    private static String getServiceName(RpcService rpcService) {
+        return rpcService.interfaceClass().toString();
     }
 }

@@ -5,15 +5,21 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.nya</groupId>
-        <artifactId>nyarpc-test</artifactId>
+        <artifactId>nyarpc</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>nyarpc-test-scanner</artifactId>
+    <artifactId>nyarpc-provider</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>nyarpc-provider-common</module>
+        <module>nyarpc-provider-native</module>
+    </modules>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
 </project>

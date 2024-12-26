@@ -12,6 +12,7 @@
         <module>nyarpc-annotation</module>
         <module>nyarpc-common</module>
         <module>nyarpc-test</module>
+        <module>nyarpc-provider</module>
     </modules>
 
     <properties>
