@@ -29,7 +29,7 @@ public @interface RpcReference {
     /**
      * 注册中心地址，默认本地
      */
-    String rgistryAddress() default "127.0.0.1";
+    String registryAddress() default "127.0.0.1";
 
     /**
      * 负载均衡类型,默认zk的一致性Hash
@@ -39,7 +39,7 @@ public @interface RpcReference {
     /**
      * 序列化类型：protostuff、kryo、json、jdk、fst、hessian2
      */
-    String serilizatonType() default "protostuff";
+    String serializationType() default "protostuff";
 
     /**
      * 超时时间，默认5s
