@@ -34,7 +34,7 @@ public class RpcServiceScanner extends ClassScanner {
                 RpcService rpcService = clazz.getAnnotation(RpcService.class);
                 if (rpcService != null) {
                     // 优先使用interfaceClass,interfaceClass的name为空，再使用interfaceClassName
-                    // TODO 向注册中心注册服务元数据，同时handlerMap标记RpcService注解标注的实例
+                    // 向注册中心注册服务元数据，同时handlerMap标记RpcService注解标注的实例
                     String serviceName = getServiceName(rpcService);
                     String key = serviceName + rpcService.version() + rpcService.group();
                     handlerMap.put(key, clazz.newInstance());
@@ -56,6 +56,7 @@ public class RpcServiceScanner extends ClassScanner {
     }
 
     private static String getServiceName(RpcService rpcService) {
-        return rpcService.interfaceClass().toString();
+        if(rpcService.interfaceClass() != null)return rpcService.interfaceClass().toString();
+        return rpcService.interfaceClassName();
     }
 }

@@ -13,6 +13,8 @@
         <module>nyarpc-common</module>
         <module>nyarpc-test</module>
         <module>nyarpc-provider</module>
+        <module>nyarpc-protocol</module>
+        <module>nyarpc-constants</module>
     </modules>
 
     <properties>
