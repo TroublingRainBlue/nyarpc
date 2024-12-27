@@ -10,7 +10,7 @@ public class IdFactory {
         long currentId = counter.incrementAndGet();
         if (currentId == MAX_ID) {
             // Reset the counter when it reaches the maximum value
-            counter.set(1);
+            counter.set(0);
         }
         return currentId;
     }
