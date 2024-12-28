@@ -8,8 +8,8 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-import io.netty.handler.codec.string.StringDecoder;
-import io.netty.handler.codec.string.StringEncoder;
+import io.nya.rpc.codec.RpcDecoder;
+import io.nya.rpc.codec.RpcEncoder;
 import io.nya.rpc.provider.common.RpcProviderHandler;
 import io.nya.rpc.provider.common.server.api.Server;
 import org.slf4j.Logger;
@@ -48,10 +48,9 @@ public class BaseServer implements Server {
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         @Override
                         protected void initChannel(SocketChannel socketChannel) throws Exception {
-                            // TODO 自定义编码
                             socketChannel.pipeline()
-                                    .addLast(new StringEncoder())
-                                    .addLast(new StringDecoder())
+                                    .addLast(new RpcDecoder())
+                                    .addLast(new RpcEncoder())
                                     .addLast(new RpcProviderHandler(handlerMap));
                         }
                     })

@@ -2,9 +2,9 @@ package io.nya.rpc.common.utils;
 
 public class SerializationUtils {
     // 序列化类型，约定为 16 字节，不足 16 字节填充 0
-    private static final String PADDING_STRING = "0";
+    public static final String PADDING_STRING = "0";
 
-    private static final int MAX_SERIALIZATION_TYPE_LEN = 16;
+    public static final int MAX_SERIALIZATION_TYPE_LEN = 16;
 
     /**
      * 不足补0

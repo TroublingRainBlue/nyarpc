@@ -14,6 +14,13 @@ public enum RpcType {
         this.type = code;
     }
 
+    public static RpcType findType(byte msgType) {
+        if(msgType == 1) return REQUEST;
+        else if(msgType == 2) return RESPONSE;
+        else if(msgType == 3) return HEARTBEAT;
+        else return null;
+    }
+
     public int getCode() {
         return type;
     }
