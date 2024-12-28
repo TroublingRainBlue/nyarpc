@@ -11,7 +11,7 @@ public class SerializationUtils {
      * @param s 序列化类型
      * @return 填入header中的序列化类型
      */
-    public String paddingString(String s) {
+    public static String paddingString(String s) {
         s = transferNullEmpty(s);
         int n = s.length();
         if(n >= MAX_SERIALIZATION_TYPE_LEN) {
@@ -30,11 +30,11 @@ public class SerializationUtils {
      * @param s header中的序列化类型
      * @return 原始序列化类型
      */
-    public String subString(String s) {
+    public static String subString(String s) {
         s = transferNullEmpty(s);
         return s.replace(PADDING_STRING, "");
     }
-    private String transferNullEmpty(String s) {
+    private static String transferNullEmpty(String s) {
         return  s == null ? "" : s;
     }
 }

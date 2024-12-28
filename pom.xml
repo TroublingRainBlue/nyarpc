@@ -16,6 +16,7 @@
         <module>nyarpc-protocol</module>
         <module>nyarpc-constants</module>
         <module>nyarpc-serialization</module>
+        <module>nyarpc-codec</module>
     </modules>
 
     <properties>
