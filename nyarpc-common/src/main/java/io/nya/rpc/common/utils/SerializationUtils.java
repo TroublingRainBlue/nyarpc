@@ -1,5 +1,7 @@
 package io.nya.rpc.common.utils;
 
+import java.util.stream.IntStream;
+
 public class SerializationUtils {
     // 序列化类型，约定为 16 字节，不足 16 字节填充 0
     public static final String PADDING_STRING = "0";
@@ -17,10 +19,11 @@ public class SerializationUtils {
         if(n >= MAX_SERIALIZATION_TYPE_LEN) {
             return s;
         }
+        int paddingCount = MAX_SERIALIZATION_TYPE_LEN - n;
         StringBuilder strBuilder = new StringBuilder(s);
-        for(int i = n; i <= MAX_SERIALIZATION_TYPE_LEN; i++) {
+        IntStream.range(0, paddingCount).forEach((i)->{
             strBuilder.append(PADDING_STRING);
-        }
+        });
         s = strBuilder.toString();
         return s;
     }

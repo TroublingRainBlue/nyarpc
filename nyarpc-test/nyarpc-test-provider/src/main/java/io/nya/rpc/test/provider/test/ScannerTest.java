@@ -1,4 +1,4 @@
-package io.nya.rpc.test.scanner.test;
+package io.nya.rpc.test.provider.test;
 
 import io.nya.rpc.common.scanner.ClassScanner;
 import io.nya.rpc.common.scanner.reference.RpcReferenceScanner;
@@ -18,7 +18,7 @@ public class ScannerTest {
 
     @Test
     public void testScannerRpcService() throws Exception{
-        Map<String, Object> map = RpcServiceScanner.doScannerWithRpcServiceAnnotationFilterAndRegistryService("io.nya.rpc.test.scanner");
+        Map<String, Object> map = RpcServiceScanner.doScannerWithRpcServiceAnnotationFilterAndRegistryService("io.nya.rpc.test.provider");
     }
 
     @Test

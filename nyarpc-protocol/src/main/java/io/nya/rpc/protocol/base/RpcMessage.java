@@ -21,7 +21,7 @@ public class RpcMessage implements Serializable {
         this.oneway = oneway;
     }
 
-    public boolean getOnway() {
+    public boolean getOneway() {
         return this.oneway;
     }
 }
