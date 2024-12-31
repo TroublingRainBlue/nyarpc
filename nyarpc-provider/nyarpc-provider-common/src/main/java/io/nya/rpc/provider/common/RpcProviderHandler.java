@@ -1,7 +1,5 @@
 package io.nya.rpc.provider.common;
 
-import com.alibaba.fastjson2.JSONObject;
-import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -32,11 +30,11 @@ public class RpcProviderHandler extends SimpleChannelInboundHandler<RpcProtocol<
 
     @Override
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, RpcProtocol<RpcRequest> protocol) throws Exception {
+
         ServerThreadPool.submit(()->{
             RpcHeader header = protocol.getHeader();
             header.setMsgType((byte) RpcType.RESPONSE.getCode());
             RpcRequest request = protocol.getBody();
-            LOGGER.debug("Receive requestId:{}", header.getRequestId());
             RpcProtocol<RpcResponse> responseRpcProtocol = new RpcProtocol<>();
             RpcResponse response = new RpcResponse();
 
@@ -55,12 +53,8 @@ public class RpcProviderHandler extends SimpleChannelInboundHandler<RpcProtocol<
 
             responseRpcProtocol.setBody(response);
             responseRpcProtocol.setHeader(header);
-            channelHandlerContext.writeAndFlush(responseRpcProtocol).addListener(new ChannelFutureListener() {
-                @Override
-                public void operationComplete(ChannelFuture channelFuture) throws Exception {
-                    LOGGER.info("Send Response for request:{}", header.getRequestId());
-                }
-            });
+            channelHandlerContext.writeAndFlush(responseRpcProtocol).addListener((ChannelFutureListener)
+                    channelFuture -> LOGGER.info("Send Response for request:{}", header.getRequestId()));
         });
     }
 
@@ -69,6 +63,7 @@ public class RpcProviderHandler extends SimpleChannelInboundHandler<RpcProtocol<
 
         // 获取调用的类
         Object serviceBean = handlerMap.get(serviceKey);
+        LOGGER.info(serviceBean.toString());
         Class<?> clazz = serviceBean.getClass();
 
         // 获取调用方法和方法参数

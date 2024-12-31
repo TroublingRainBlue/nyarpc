@@ -25,11 +25,13 @@ public class RpcServiceScanner extends ClassScanner {
     public static Map<String, Object> doScannerWithRpcServiceAnnotationFilterAndRegistryService(String scanPackage) throws Exception {
         Map<String, Object> handlerMap = new HashMap<>();
         List<String> classNameList = getClassNameList(scanPackage);
+
         if(classNameList.isEmpty()) {
             return handlerMap;
         }
 
         for (String className : classNameList) {
+            LOGGER.info(className);
             try {
                 Class<?> clazz = Class.forName(className);
                 RpcService rpcService = clazz.getAnnotation(RpcService.class);
@@ -49,7 +51,7 @@ public class RpcServiceScanner extends ClassScanner {
     }
 
     private static String getServiceName(RpcService rpcService) {
-        if(rpcService.interfaceClass() != null)return rpcService.interfaceClass().toString();
+        // if(rpcService.interfaceClass() != null)return rpcService.interfaceClass().toString();
         return rpcService.interfaceClassName();
     }
 }

@@ -16,6 +16,7 @@
         <module>nyarpc-test-provider</module>
         <module>nyarpc-test-comsumer</module>
         <module>nyarpc-test-comsumer/nyarpc-test-comsumer-codec</module>
+        <module>nyarpc-test-api</module>
     </modules>
 
     <properties>

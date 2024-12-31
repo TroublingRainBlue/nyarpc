@@ -27,14 +27,14 @@ public class RpcTestConsumerHandler extends SimpleChannelInboundHandler<RpcProto
         RpcProtocol<RpcRequest> protocol = new RpcProtocol<>();
         RpcHeader header = RpcHeaderFactory.getRpcHeader("jdk");
         RpcRequest request = new RpcRequest();
-        request.setClassName("io.nya.rpc.test.provider.service.DemoService");
+        request.setClassName("io.nya.rpc.test.api.DemoService");
         request.setGroup("nya");
         request.setParams(new Object[]{"nya"});
         request.setParameterTypes(new Class[]{String.class});
         request.setVersion("1.0.0");
         request.setAsync(false);
         request.setOneway(false);
-        request.setMethodName("Hello");
+        request.setMethodName("hello");
         protocol.setHeader(header);
         protocol.setBody(request);
         LOGGER.info("发送的数据为:===>>>{}", JSONObject.toJSONString(protocol));

@@ -1,4 +1,4 @@
-package io.nya.rpc.test.provider.test;
+package io.nya.rpc.test.api;
 
 import io.nya.rpc.common.scanner.ClassScanner;
 import io.nya.rpc.common.scanner.reference.RpcReferenceScanner;
@@ -13,11 +13,15 @@ public class ScannerTest {
     @Test
     public void testScannerClassNameList() throws Exception{
         List<String> classNameList = ClassScanner.getClassNameList("io.nya.rpc.test.provider");
+        classNameList.forEach(System.out::println);
     }
 
     @Test
     public void testScannerRpcService() throws Exception{
         Map<String, Object> map = RpcServiceScanner.doScannerWithRpcServiceAnnotationFilterAndRegistryService("io.nya.rpc.test.api");
+        for(Map.Entry entry : map.entrySet()) {
+            System.out.println(entry.getKey());
+        }
     }
 
     @Test
