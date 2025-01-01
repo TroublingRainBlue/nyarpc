@@ -8,8 +8,8 @@ import org.slf4j.LoggerFactory;
 public class RpcSingleServer extends BaseServer {
     private static final Logger LOGGER = LoggerFactory.getLogger(RpcSingleServer.class);
 
-    public RpcSingleServer(String serverAddress, String packageName) {
-        super(serverAddress);
+    public RpcSingleServer(String serverAddress, String packageName, String reflectType) {
+        super(serverAddress, reflectType);
         try {
             this.handlerMap = RpcServiceScanner.doScannerWithRpcServiceAnnotationFilterAndRegistryService(packageName);
         } catch (Exception e) {

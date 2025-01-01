@@ -28,13 +28,16 @@ public class BaseServer implements Server {
     //端口号
     protected int port = 20020;
 
+    protected String reflectType = "jdk";
+
     protected Map<String, Object> handlerMap = new HashMap<>();
 
-    public BaseServer(String serverAddress) {
+    public BaseServer(String serverAddress, String reflectType) {
         if(!serverAddress.isEmpty()) {
             String[] server = serverAddress.split(":");
             this.host = server[0];
             this.port = Integer.parseInt(server[1]);
+            this.reflectType = reflectType;
         }
     }
 
@@ -51,7 +54,7 @@ public class BaseServer implements Server {
                             socketChannel.pipeline()
                                     .addLast(new RpcDecoder())
                                     .addLast(new RpcEncoder())
-                                    .addLast(new RpcProviderHandler(handlerMap));
+                                    .addLast(new RpcProviderHandler(handlerMap, reflectType));
                         }
                     })
                     .option(ChannelOption.SO_BACKLOG, 128)

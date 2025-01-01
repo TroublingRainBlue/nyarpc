@@ -5,12 +5,15 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.nya.rpc.common.helper.RpcServiceHelper;
 import io.nya.rpc.common.threadpool.ServerThreadPool;
+import io.nya.rpc.constants.RpcConstants;
 import io.nya.rpc.protocol.RpcProtocol;
 import io.nya.rpc.protocol.enumerate.RpcStatus;
 import io.nya.rpc.protocol.enumerate.RpcType;
 import io.nya.rpc.protocol.header.RpcHeader;
 import io.nya.rpc.protocol.request.RpcRequest;
 import io.nya.rpc.protocol.response.RpcResponse;
+import net.sf.cglib.reflect.FastClass;
+import net.sf.cglib.reflect.FastMethod;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,8 +27,11 @@ public class RpcProviderHandler extends SimpleChannelInboundHandler<RpcProtocol<
 
     private final Map<String, Object> handlerMap;
 
-    public RpcProviderHandler(Map<String, Object> handlerMap) {
+    private String reflectType;
+
+    public RpcProviderHandler(Map<String, Object> handlerMap, String reflectType) {
         this.handlerMap = handlerMap;
+        this.reflectType = reflectType;
     }
 
     @Override
@@ -71,10 +77,25 @@ public class RpcProviderHandler extends SimpleChannelInboundHandler<RpcProtocol<
         Class<?>[] parameterTypes= request.getParameterTypes();
         Object[] params = request.getParams();
 
-        // 反射执行方法
+        switch (this.reflectType) {
+            case RpcConstants.REFLECT_TYPE_JDK:
+                return invokeJdkMethod(serviceBean, clazz, methodName, parameterTypes, params);
+            case  RpcConstants.REFLECT_TYPE_CGLib:
+                return invokeJCGlibMethod(serviceBean, clazz, methodName, parameterTypes, params);
+            default:
+                throw new IllegalArgumentException("not support reflect type");
+        }
+    }
+
+    private Object invokeJdkMethod(Object serviceBean ,Class<?> clazz,String methodName, Class<?>[] parameterTypes, Object[] params) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         Method method = clazz.getMethod(methodName, parameterTypes);
         method.setAccessible(true);
         return method.invoke(serviceBean, params);
+    }
 
+    private Object invokeJCGlibMethod(Object serviceBean ,Class<?> clazz,String methodName, Class<?>[] parameterTypes, Object[] params) throws InvocationTargetException {
+        FastClass serviceFastClass = FastClass.create(clazz);
+        FastMethod method = serviceFastClass.getMethod(methodName, parameterTypes);
+        return method.invoke(serviceBean, params);
     }
 }
