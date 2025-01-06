@@ -6,7 +6,7 @@ import io.nya.rpc.protocol.enumerate.RpcType;
 public class RpcHeaderFactory {
     public static RpcHeader getRpcHeader(String serializtionType) {
         RpcHeader header = new RpcHeader();
-        long requestId = IdFactory.getId();
+        long requestId = IdFactory.getInstance().getId();
         header.setMagic(RpcConstants.MAGIC);
         header.setRequestId(requestId);
         header.setMsgType((byte) RpcType.REQUEST.getCode());

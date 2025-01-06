@@ -69,7 +69,6 @@ public class RpcProviderHandler extends SimpleChannelInboundHandler<RpcProtocol<
 
         // 获取调用的类
         Object serviceBean = handlerMap.get(serviceKey);
-        LOGGER.info(serviceBean.toString());
         Class<?> clazz = serviceBean.getClass();
 
         // 获取调用方法和方法参数
@@ -88,12 +87,14 @@ public class RpcProviderHandler extends SimpleChannelInboundHandler<RpcProtocol<
     }
 
     private Object invokeJdkMethod(Object serviceBean ,Class<?> clazz,String methodName, Class<?>[] parameterTypes, Object[] params) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        // LOGGER.info("jdk reflect...");
         Method method = clazz.getMethod(methodName, parameterTypes);
         method.setAccessible(true);
         return method.invoke(serviceBean, params);
     }
 
     private Object invokeJCGlibMethod(Object serviceBean ,Class<?> clazz,String methodName, Class<?>[] parameterTypes, Object[] params) throws InvocationTargetException {
+        // LOGGER.info("cglib...");
         FastClass serviceFastClass = FastClass.create(clazz);
         FastMethod method = serviceFastClass.getMethod(methodName, parameterTypes);
         return method.invoke(serviceBean, params);
