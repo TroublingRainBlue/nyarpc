@@ -3,6 +3,7 @@ package io.nya.rpc.consumer.handler;
 import com.alibaba.fastjson2.JSONObject;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.*;
+import io.nya.rpc.consumer.common.RpcFuture;
 import io.nya.rpc.protocol.RpcProtocol;
 import io.nya.rpc.protocol.request.RpcRequest;
 import io.nya.rpc.protocol.response.RpcResponse;
@@ -17,7 +18,7 @@ public class RpcConsumerHandler extends SimpleChannelInboundHandler<RpcProtocol<
     private static final Logger LOGGER = LoggerFactory.getLogger(RpcConsumerHandler.class);
     private SocketAddress remotePeer;
     private Channel channel;
-    private Map<Long, RpcProtocol<RpcResponse>> penddingMap = new ConcurrentHashMap<>();
+    private Map<Long, RpcFuture> penddingMap = new ConcurrentHashMap<>();
     public Channel getChannel() {
         return channel;
     }
@@ -43,20 +44,23 @@ public class RpcConsumerHandler extends SimpleChannelInboundHandler<RpcProtocol<
         LOGGER.info("服务消费者接收到的数据===>>>{}", JSONObject.toJSONString(protocol));
         // 得到结果后添加进Map
         Long requestId = protocol.getHeader().getRequestId();
-        penddingMap.put(requestId, protocol);
+        RpcFuture future = penddingMap.remove(requestId);
+        if(future != null) {
+            future.done(protocol);
+        }
     }
 
-    public Object sendRequest(RpcProtocol<RpcRequest> protocol) {
+    public RpcFuture sendRequest(RpcProtocol<RpcRequest> protocol) {
         LOGGER.info("服务消费者发送的数据===>>>{}", JSONObject.toJSONString(protocol));
+        RpcFuture future = getRpcFuture(protocol);
         channel.writeAndFlush(protocol);
-        Long requestId = protocol.getHeader().getRequestId();
-        // 异步转同步获得调用结果
-        while(true) {
-            RpcProtocol<RpcResponse> responseRpcProtocol = penddingMap.remove(requestId);
-            if(responseRpcProtocol != null) {
-                return responseRpcProtocol.getBody().getResult();
-            }
-        }
+        return future;
+    }
+
+    private RpcFuture getRpcFuture(RpcProtocol<RpcRequest> protocol) {
+        RpcFuture future = new RpcFuture(protocol);
+        penddingMap.put(protocol.getHeader().getRequestId(), future);
+        return future;
     }
 
     public void close() {

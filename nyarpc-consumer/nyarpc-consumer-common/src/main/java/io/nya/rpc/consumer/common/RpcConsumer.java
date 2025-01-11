@@ -44,7 +44,7 @@ public class RpcConsumer {
         group.shutdownGracefully();
     }
 
-    public Object sendRequest(RpcProtocol<RpcRequest> protocol) throws Exception {
+    public RpcFuture sendRequest(RpcProtocol<RpcRequest> protocol) throws Exception {
         // TODO 从注册中心获得服务提供者的 IP 和 Port，现在暂时写死
         String serverAddress = "127.0.0.1";
         int port = 27880;
