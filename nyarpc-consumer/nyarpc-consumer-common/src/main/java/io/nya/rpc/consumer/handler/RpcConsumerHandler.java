@@ -10,12 +10,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.SocketAddress;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class RpcConsumerHandler extends SimpleChannelInboundHandler<RpcProtocol<RpcResponse>> {
     private static final Logger LOGGER = LoggerFactory.getLogger(RpcConsumerHandler.class);
     private SocketAddress remotePeer;
     private Channel channel;
-
+    private Map<Long, RpcProtocol<RpcResponse>> penddingMap = new ConcurrentHashMap<>();
     public Channel getChannel() {
         return channel;
     }
@@ -39,11 +41,22 @@ public class RpcConsumerHandler extends SimpleChannelInboundHandler<RpcProtocol<
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, RpcProtocol<RpcResponse> protocol) throws Exception {
         LOGGER.info("服务消费者接收到的数据===>>>{}", JSONObject.toJSONString(protocol));
+        // 得到结果后添加进Map
+        Long requestId = protocol.getHeader().getRequestId();
+        penddingMap.put(requestId, protocol);
     }
 
-    public void sendRequest(RpcProtocol<RpcRequest> protocol) {
+    public Object sendRequest(RpcProtocol<RpcRequest> protocol) {
         LOGGER.info("服务消费者发送的数据===>>>{}", JSONObject.toJSONString(protocol));
         channel.writeAndFlush(protocol);
+        Long requestId = protocol.getHeader().getRequestId();
+        // 异步转同步获得调用结果
+        while(true) {
+            RpcProtocol<RpcResponse> responseRpcProtocol = penddingMap.remove(requestId);
+            if(responseRpcProtocol != null) {
+                return responseRpcProtocol.getBody().getResult();
+            }
+        }
     }
 
     public void close() {

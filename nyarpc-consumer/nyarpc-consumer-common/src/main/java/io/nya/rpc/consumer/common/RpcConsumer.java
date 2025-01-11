@@ -44,7 +44,7 @@ public class RpcConsumer {
         group.shutdownGracefully();
     }
 
-    public void sendRequest(RpcProtocol<RpcRequest> protocol) throws Exception {
+    public Object sendRequest(RpcProtocol<RpcRequest> protocol) throws Exception {
         // TODO 从注册中心获得服务提供者的 IP 和 Port，现在暂时写死
         String serverAddress = "127.0.0.1";
         int port = 27880;
@@ -59,7 +59,7 @@ public class RpcConsumer {
             handler = getRpcConsumerHandler(serverAddress, port);
             handlerMap.put(key, handler);
         }
-        handler.sendRequest(protocol);
+        return handler.sendRequest(protocol);
     }
 
     // 建立连接并返回对应ClientHandler

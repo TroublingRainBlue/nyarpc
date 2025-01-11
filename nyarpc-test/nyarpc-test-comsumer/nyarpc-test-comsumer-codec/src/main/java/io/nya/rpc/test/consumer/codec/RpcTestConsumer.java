@@ -14,14 +14,25 @@ import io.nya.rpc.test.consumer.codec.init.RpcTestConsumerInitializer;
 
 public class RpcTestConsumer {
     public static void main(String[] args) throws Exception {
-        RpcConsumer consumer = RpcConsumer.getInstance();
         int i = 0;
-        while(i < 5){
-            consumer.sendRequest(getRpcConsumerProtocol());
-            Thread.sleep(2000);
+        while(i < 10){
+            new Thread(() ->{
+                int j = 0;
+                RpcConsumer consumer = RpcConsumer.getInstance();
+                Object result = null;
+                while(j < 100000) {
+                    try {
+                        result = consumer.sendRequest(getRpcConsumerProtocol());
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                    j++;
+                }
+                System.out.println(result.toString());
+                consumer.close();
+            }).start();
             i++;
         }
-        consumer.close();;
     }
 
     private static RpcProtocol<RpcRequest> getRpcConsumerProtocol() {
@@ -30,7 +41,7 @@ public class RpcTestConsumer {
         RpcRequest request = new RpcRequest();
         request.setClassName("io.nya.rpc.test.api.DemoService");
         request.setGroup("nya");
-        request.setParams(new Object[]{"nya"});
+        request.setParams(new Object[]{"Sakiko"});
         request.setParameterTypes(new Class[]{String.class});
         request.setVersion("1.0.0");
         request.setAsync(false);
