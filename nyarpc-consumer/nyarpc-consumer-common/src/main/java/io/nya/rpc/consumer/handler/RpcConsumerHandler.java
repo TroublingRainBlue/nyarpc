@@ -3,6 +3,7 @@ package io.nya.rpc.consumer.handler;
 import com.alibaba.fastjson2.JSONObject;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.*;
+import io.nya.rpc.consumer.common.RpcContext;
 import io.nya.rpc.consumer.common.RpcFuture;
 import io.nya.rpc.protocol.RpcProtocol;
 import io.nya.rpc.protocol.request.RpcRequest;
@@ -41,7 +42,6 @@ public class RpcConsumerHandler extends SimpleChannelInboundHandler<RpcProtocol<
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, RpcProtocol<RpcResponse> protocol) throws Exception {
-        LOGGER.info("服务消费者接收到的数据===>>>{}", JSONObject.toJSONString(protocol));
         // 得到结果后添加进Map
         Long requestId = protocol.getHeader().getRequestId();
         RpcFuture future = penddingMap.remove(requestId);
@@ -50,13 +50,38 @@ public class RpcConsumerHandler extends SimpleChannelInboundHandler<RpcProtocol<
         }
     }
 
-    public RpcFuture sendRequest(RpcProtocol<RpcRequest> protocol) {
-        LOGGER.info("服务消费者发送的数据===>>>{}", JSONObject.toJSONString(protocol));
-        RpcFuture future = getRpcFuture(protocol);
+    public RpcFuture sendRequest(RpcProtocol<RpcRequest> protocol, boolean async, boolean oneway) {
+        return oneway ? this.sendRequestOneway(protocol) : async ? this.sendRequestAsync(protocol) : this.sendRequestSync(protocol);
+    }
+
+    /**
+     * 服务消费者进行同步调用
+     */
+    public RpcFuture sendRequestSync(RpcProtocol<RpcRequest> protocol) {
+        // LOGGER.info("服务消费者发送的数据===>>>{}", JSONObject.toJSONString(protocol));
+        RpcFuture future = this.getRpcFuture(protocol);
         channel.writeAndFlush(protocol);
         return future;
     }
 
+    /**
+     * 服务消费者进行异步调用
+     */
+    public RpcFuture sendRequestAsync(RpcProtocol<RpcRequest> protocol) {
+        RpcFuture future = this.getRpcFuture(protocol);
+        // 如果为异步调用，将Future放入Context中
+        RpcContext.getInstance().setRpcFuture(future);
+        channel.writeAndFlush(protocol);
+        return null;
+    }
+
+    /**
+     * 服务消费者进行单向调用
+     */
+    public RpcFuture sendRequestOneway(RpcProtocol<RpcRequest> protocol) {
+        channel.writeAndFlush(protocol);
+        return null;
+    }
     private RpcFuture getRpcFuture(RpcProtocol<RpcRequest> protocol) {
         RpcFuture future = new RpcFuture(protocol);
         penddingMap.put(protocol.getHeader().getRequestId(), future);
