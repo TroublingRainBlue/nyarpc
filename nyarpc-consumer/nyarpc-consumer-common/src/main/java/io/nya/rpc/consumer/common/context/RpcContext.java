@@ -1,4 +1,6 @@
-package io.nya.rpc.consumer.common;
+package io.nya.rpc.consumer.common.context;
+
+import io.nya.rpc.consumer.common.RpcFuture;
 
 public class RpcContext {
     private static RpcContext instance = new RpcContext();

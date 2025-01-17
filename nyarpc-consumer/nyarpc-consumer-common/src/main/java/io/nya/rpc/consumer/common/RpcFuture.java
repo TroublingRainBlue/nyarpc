@@ -1,16 +1,21 @@
 package io.nya.rpc.consumer.common;
 
+import io.nya.rpc.consumer.common.callback.AsyncRpcCallback;
+import io.nya.rpc.consumer.common.threadpool.ClientThreadPool;
 import io.nya.rpc.protocol.RpcProtocol;
 import io.nya.rpc.protocol.request.RpcRequest;
 import io.nya.rpc.protocol.response.RpcResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.locks.AbstractQueuedSynchronizer;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class RpcFuture extends CompletableFuture<Object> {
     private static final Logger logger = LoggerFactory.getLogger(RpcFuture.class);
@@ -19,7 +24,8 @@ public class RpcFuture extends CompletableFuture<Object> {
     private RpcProtocol<RpcResponse> response;
     private long startTime;
     private long responseTimeThreshold = 5000;
-
+    private List<AsyncRpcCallback> pendingCallbacks = new ArrayList<>();
+    private ReentrantLock lock = new ReentrantLock();
     public RpcFuture(RpcProtocol<RpcRequest> request) {
         this.request = request;
         this.sync = new Sync();
@@ -70,11 +76,52 @@ public class RpcFuture extends CompletableFuture<Object> {
     public void done(RpcProtocol<RpcResponse> response) {
         this.response = response;
         sync.release(1);
+        // 执行回调
+        invokeCallbacks();
+
         // Threshold
         long responseTime = System.currentTimeMillis() - startTime;
-
         if(responseTime > responseTimeThreshold) {
             logger.warn("Service response too slowly. RequestId:{}. Response Time:{} ms", response.getHeader().getRequestId(), responseTime);
+        }
+    }
+
+    // 回调方法
+    private void runCallback(final AsyncRpcCallback callback) {
+        final RpcResponse res = this.response.getBody();
+        ClientThreadPool.submit(()->{
+            if(res.getError() == null) {
+                callback.onSuccess(res.getResult());
+            } else {
+                callback.onException(new RuntimeException("Response error:", new Throwable(res.getError())));
+            }
+        });
+    }
+
+    // 添加需要回调的接口
+    public RpcFuture addCallback(AsyncRpcCallback callback) {
+        lock.lock();
+        try {
+            if(isDone()) {
+                runCallback(callback);
+            } else {
+                this.pendingCallbacks.add(callback);
+            }
+        } finally {
+            lock.unlock();
+        }
+        return this;
+    }
+
+    // 依次执行回调接口
+    public void invokeCallbacks() {
+        lock.lock();
+        try {
+            for(final AsyncRpcCallback callback : this.pendingCallbacks) {
+                runCallback(callback);
+            }
+        } finally {
+            lock.unlock();
         }
     }
 

@@ -1,18 +1,10 @@
 package io.nya.rpc.test.consumer.codec;
 
-import com.alibaba.fastjson2.JSONObject;
-import io.netty.bootstrap.Bootstrap;
-import io.netty.channel.EventLoopGroup;
-import io.netty.channel.nio.NioEventLoopGroup;
-import io.netty.channel.socket.nio.NioSocketChannel;
 import io.nya.rpc.consumer.common.RpcConsumer;
-import io.nya.rpc.consumer.common.RpcContext;
-import io.nya.rpc.consumer.common.RpcFuture;
 import io.nya.rpc.protocol.RpcProtocol;
 import io.nya.rpc.protocol.header.RpcHeader;
 import io.nya.rpc.protocol.header.RpcHeaderFactory;
 import io.nya.rpc.protocol.request.RpcRequest;
-import io.nya.rpc.test.consumer.codec.init.RpcTestConsumerInitializer;
 
 public class RpcTestConsumer {
     public static void main(String[] args) throws Exception {
