@@ -21,6 +21,12 @@
     <file url="file://$PROJECT_DIR$/nyarpc-provider/nyarpc-provider-native/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/nyarpc-provider/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/nyarpc-provider/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/nyarpc-proxy/nyarpc-proxy-api/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/nyarpc-proxy/nyarpc-proxy-api/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/nyarpc-proxy/nyarpc-proxy-jdk/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/nyarpc-proxy/nyarpc-proxy-jdk/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/nyarpc-proxy/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/nyarpc-proxy/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/nyarpc-serialization/nyarpc-serialization-api/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/nyarpc-serialization/nyarpc-serialization-api/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/nyarpc-serialization/nyarpc-serialization-jdk/src/main/java" charset="UTF-8" />

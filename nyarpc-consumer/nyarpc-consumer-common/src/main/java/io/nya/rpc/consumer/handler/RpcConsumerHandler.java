@@ -3,7 +3,7 @@ package io.nya.rpc.consumer.handler;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.*;
 import io.nya.rpc.consumer.common.context.RpcContext;
-import io.nya.rpc.consumer.common.RpcFuture;
+import io.nya.rpc.proxy.api.future.RpcFuture;
 import io.nya.rpc.protocol.RpcProtocol;
 import io.nya.rpc.protocol.request.RpcRequest;
 import io.nya.rpc.protocol.response.RpcResponse;

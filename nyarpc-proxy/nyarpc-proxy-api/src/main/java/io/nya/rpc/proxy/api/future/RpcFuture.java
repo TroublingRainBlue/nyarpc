@@ -1,10 +1,10 @@
-package io.nya.rpc.consumer.common;
+package io.nya.rpc.proxy.api.future;
 
-import io.nya.rpc.consumer.common.callback.AsyncRpcCallback;
 import io.nya.rpc.consumer.common.threadpool.ClientThreadPool;
 import io.nya.rpc.protocol.RpcProtocol;
 import io.nya.rpc.protocol.request.RpcRequest;
 import io.nya.rpc.protocol.response.RpcResponse;
+import io.nya.rpc.proxy.api.callback.AsyncRpcCallback;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -89,6 +89,7 @@ public class RpcFuture extends CompletableFuture<Object> {
     // 回调方法
     private void runCallback(final AsyncRpcCallback callback) {
         final RpcResponse res = this.response.getBody();
+
         ClientThreadPool.submit(()->{
             if(res.getError() == null) {
                 callback.onSuccess(res.getResult());

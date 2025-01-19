@@ -1,6 +1,6 @@
 package io.nya.rpc.consumer.common.context;
 
-import io.nya.rpc.consumer.common.RpcFuture;
+import io.nya.rpc.proxy.api.future.RpcFuture;
 
 public class RpcContext {
     private static RpcContext instance = new RpcContext();
@@ -17,7 +17,6 @@ public class RpcContext {
      * RpcFuture的InheritableThreadLocal
      */
     private static final InheritableThreadLocal<RpcFuture> RPC_FUTURE_INHERITABLE_THREAD_LOCAL = new InheritableThreadLocal<>();
-
 
     /**
      * 将RpcFuture保存到线程上下文中

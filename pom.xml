@@ -18,6 +18,7 @@
         <module>nyarpc-serialization</module>
         <module>nyarpc-codec</module>
         <module>nyarpc-consumer</module>
+        <module>nyarpc-proxy</module>
     </modules>
 
     <properties>

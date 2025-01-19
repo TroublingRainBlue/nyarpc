@@ -11,13 +11,15 @@ import io.nya.rpc.consumer.handler.RpcConsumerHandler;
 import io.nya.rpc.consumer.initializer.RpcConsumerInitializer;
 import io.nya.rpc.protocol.RpcProtocol;
 import io.nya.rpc.protocol.request.RpcRequest;
+import io.nya.rpc.proxy.api.consumer.Consumer;
+import io.nya.rpc.proxy.api.future.RpcFuture;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class RpcConsumer {
+public class RpcConsumer implements Consumer {
     private static final Logger logger = LoggerFactory.getLogger(RpcConsumer.class);
     private final Bootstrap bootstrap;
     private final EventLoopGroup group;

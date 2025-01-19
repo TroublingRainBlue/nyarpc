@@ -1,4 +1,4 @@
-package io.nya.rpc.consumer.common.callback;
+package io.nya.rpc.proxy.api.callback;
 
 public interface AsyncRpcCallback {
     /**
