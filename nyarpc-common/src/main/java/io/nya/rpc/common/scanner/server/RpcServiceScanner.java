@@ -50,8 +50,16 @@ public class RpcServiceScanner extends ClassScanner {
         return handlerMap;
     }
 
-    private static String getServiceName(RpcService rpcService) {
-        // if(rpcService.interfaceClass() != null)return rpcService.interfaceClass().toString();
-        return rpcService.interfaceClassName();
+    private static String getServiceName(RpcService rpcService){
+        //优先使用interfaceClass
+        Class clazz = rpcService.interfaceClass();
+        if (clazz == null || clazz == void.class){
+            return rpcService.interfaceClassName();
+        }
+        String serviceName = clazz.getName();
+        if (serviceName == null || serviceName.trim().isEmpty()){
+            serviceName = rpcService.interfaceClassName();
+        }
+        return serviceName;
     }
 }

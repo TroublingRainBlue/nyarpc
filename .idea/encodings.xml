@@ -37,6 +37,8 @@
     <file url="file://$PROJECT_DIR$/nyarpc-test/nyarpc-test-api/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/nyarpc-test/nyarpc-test-comsumer/nyarpc-test-comsumer-codec/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/nyarpc-test/nyarpc-test-comsumer/nyarpc-test-comsumer-codec/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/nyarpc-test/nyarpc-test-comsumer/nyarpc-test-consumer-native/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/nyarpc-test/nyarpc-test-comsumer/nyarpc-test-consumer-native/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/nyarpc-test/nyarpc-test-comsumer/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/nyarpc-test/nyarpc-test-comsumer/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/nyarpc-test/nyarpc-test-provider/src/main/java" charset="UTF-8" />
@@ -45,6 +47,8 @@
     <file url="file://$PROJECT_DIR$/nyarpc-test/nyarpc-test-scanner/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/nyarpc-test/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/nyarpc-test/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/nyarpc-threadpool/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/nyarpc-threadpool/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
   </component>

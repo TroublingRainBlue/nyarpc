@@ -1,10 +1,10 @@
 package io.nya.rpc.proxy.api.future;
 
-import io.nya.rpc.consumer.common.threadpool.ClientThreadPool;
 import io.nya.rpc.protocol.RpcProtocol;
 import io.nya.rpc.protocol.request.RpcRequest;
 import io.nya.rpc.protocol.response.RpcResponse;
 import io.nya.rpc.proxy.api.callback.AsyncRpcCallback;
+import io.nya.rpc.threadpool.ClientThreadPool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

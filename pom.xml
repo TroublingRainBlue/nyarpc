@@ -19,6 +19,7 @@
         <module>nyarpc-codec</module>
         <module>nyarpc-consumer</module>
         <module>nyarpc-proxy</module>
+        <module>nyarpc-threadpool</module>
     </modules>
 
     <properties>

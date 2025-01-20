@@ -6,13 +6,13 @@ import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import io.nya.rpc.consumer.common.threadpool.ClientThreadPool;
 import io.nya.rpc.consumer.handler.RpcConsumerHandler;
 import io.nya.rpc.consumer.initializer.RpcConsumerInitializer;
 import io.nya.rpc.protocol.RpcProtocol;
 import io.nya.rpc.protocol.request.RpcRequest;
 import io.nya.rpc.proxy.api.consumer.Consumer;
 import io.nya.rpc.proxy.api.future.RpcFuture;
+import io.nya.rpc.threadpool.ClientThreadPool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

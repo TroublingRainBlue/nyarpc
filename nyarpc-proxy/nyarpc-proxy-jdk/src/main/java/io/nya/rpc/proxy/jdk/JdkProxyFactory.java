@@ -8,11 +8,6 @@ import java.lang.reflect.Proxy;
 
 public class JdkProxyFactory<T> {
     /**
-     * 接口的Class对象
-     */
-    private Class<T> clazz;
-
-    /**
      * 服务版本号
      */
     private String serviceVersion;
@@ -47,8 +42,7 @@ public class JdkProxyFactory<T> {
      */
     private boolean oneway;
 
-    public JdkProxyFactory(Class<T> clazz, String serviceVersion, String serviceGroup, long timeout, Consumer consumer, String serializationType, boolean async, boolean oneway) {
-        this.clazz = clazz;
+    public JdkProxyFactory(String serviceVersion, String serviceGroup, long timeout, Consumer consumer, String serializationType, boolean async, boolean oneway) {
         this.serviceVersion = serviceVersion;
         this.serviceGroup = serviceGroup;
         this.timeout = timeout;
