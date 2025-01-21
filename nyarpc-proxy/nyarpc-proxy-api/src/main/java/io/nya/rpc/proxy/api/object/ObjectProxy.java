@@ -1,8 +1,10 @@
 package io.nya.rpc.proxy.api.object;
 
 import io.nya.rpc.protocol.RpcProtocol;
+import io.nya.rpc.protocol.header.RpcHeader;
 import io.nya.rpc.protocol.header.RpcHeaderFactory;
 import io.nya.rpc.protocol.request.RpcRequest;
+import io.nya.rpc.proxy.api.async.IAsyncObjectProxy;
 import io.nya.rpc.proxy.api.consumer.Consumer;
 import io.nya.rpc.proxy.api.future.RpcFuture;
 import org.slf4j.Logger;
@@ -12,7 +14,7 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.util.concurrent.TimeUnit;
 
-public class ObjectProxy<T> implements InvocationHandler {
+public class ObjectProxy<T> implements IAsyncObjectProxy, InvocationHandler {
     private final static Logger logger = LoggerFactory.getLogger(ObjectProxy.class);
 
     /**
@@ -104,5 +106,73 @@ public class ObjectProxy<T> implements InvocationHandler {
 
         RpcFuture future = this.consumer.sendRequest(protocol);
         return future == null ? null : timeout > 0 ? future.get(timeout, TimeUnit.MILLISECONDS) : future.get();
+    }
+
+    @Override
+    public RpcFuture call(String methodName, Object... args) {
+        RpcProtocol<RpcRequest> protocol = creatRequest(this.clazz.getName(), methodName, args);
+        RpcFuture future = null;
+        try {
+            future = this.consumer.sendRequest(protocol);
+        } catch (Exception e) {
+            logger.error("async all throw exception:{}", e.toString());
+        }
+        return future;
+    }
+
+    private RpcProtocol<RpcRequest> creatRequest(String className, String methodName, Object... args) {
+        RpcProtocol<RpcRequest> protocol = new RpcProtocol<>();
+        RpcHeader header = RpcHeaderFactory.getRpcHeader(serializationType);
+        protocol.setHeader(header);
+        RpcRequest request = new RpcRequest();
+        request.setClassName(className);
+        request.setMethodName(methodName);
+        request.setOneway(this.oneway);
+        request.setAsync(this.async);
+        request.setParams(args);
+        request.setGroup(this.serviceGroup);
+        request.setVersion(this.serviceVersion);
+        Class[] parameterTypes = new Class[args.length];
+        for(int i = 0; i < args.length; i++) {
+            parameterTypes[i] = getClassType(args[i]);
+        }
+
+        request.setParameterTypes(parameterTypes);
+        protocol.setBody(request);
+
+        logger.debug(className);
+        logger.debug(methodName);
+        for (int i = 0; i < parameterTypes.length; ++i) {
+            logger.debug(parameterTypes[i].getName());
+        }
+        for (int i = 0; i < args.length; ++i) {
+            logger.debug(args[i].toString());
+        }
+
+        return protocol;
+    }
+
+    private Class<?> getClassType(Object obj){
+        Class<?> classType = obj.getClass();
+        String typeName = classType.getName();
+        switch (typeName){
+            case "java.lang.Integer":
+                return Integer.TYPE;
+            case "java.lang.Long":
+                return Long.TYPE;
+            case "java.lang.Float":
+                return Float.TYPE;
+            case "java.lang.Double":
+                return Double.TYPE;
+            case "java.lang.Character":
+                return Character.TYPE;
+            case "java.lang.Boolean":
+                return Boolean.TYPE;
+            case "java.lang.Short":
+                return Short.TYPE;
+            case "java.lang.Byte":
+                return Byte.TYPE;
+        }
+        return classType;
     }
 }
