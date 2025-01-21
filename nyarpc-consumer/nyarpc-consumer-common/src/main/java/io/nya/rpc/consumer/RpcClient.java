@@ -1,7 +1,9 @@
 package io.nya.rpc.consumer;
 
 import io.nya.rpc.consumer.common.RpcConsumer;
+import io.nya.rpc.proxy.api.ProxyFactory;
 import io.nya.rpc.proxy.api.async.IAsyncObjectProxy;
+import io.nya.rpc.proxy.api.config.ProxyConfig;
 import io.nya.rpc.proxy.api.future.RpcFuture;
 import io.nya.rpc.proxy.api.object.ObjectProxy;
 import io.nya.rpc.proxy.jdk.JdkProxyFactory;
@@ -50,8 +52,9 @@ public class RpcClient {
     }
 
     public <T> T create(Class<T> interfaceClass) {
-        JdkProxyFactory<T> jdkProxyFactory = new JdkProxyFactory<>(serviceVersion, serviceGroup, timeout, RpcConsumer.getInstance(), serializationType, async, oneway);
-        return jdkProxyFactory.getProxy(interfaceClass);
+        ProxyFactory proxyFactory = new JdkProxyFactory<T>();
+        proxyFactory.init(new ProxyConfig<>(interfaceClass, serviceVersion, serviceGroup, timeout, RpcConsumer.getInstance(), serializationType, async, oneway));
+        return proxyFactory.getProxy(interfaceClass);
     }
 
     public <T> IAsyncObjectProxy creatAsync(Class<T> interfaceClass) {
