@@ -27,6 +27,12 @@
     <file url="file://$PROJECT_DIR$/nyarpc-proxy/nyarpc-proxy-jdk/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/nyarpc-proxy/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/nyarpc-proxy/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/nyarpc-registry/nyarpc-registry-api/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/nyarpc-registry/nyarpc-registry-api/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/nyarpc-registry/nyarpc-registry-zookeeper/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/nyarpc-registry/nyarpc-registry-zookeeper/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/nyarpc-registry/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/nyarpc-registry/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/nyarpc-serialization/nyarpc-serialization-api/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/nyarpc-serialization/nyarpc-serialization-api/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/nyarpc-serialization/nyarpc-serialization-jdk/src/main/java" charset="UTF-8" />
@@ -43,6 +49,8 @@
     <file url="file://$PROJECT_DIR$/nyarpc-test/nyarpc-test-comsumer/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/nyarpc-test/nyarpc-test-provider/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/nyarpc-test/nyarpc-test-provider/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/nyarpc-test/nyarpc-test-registry/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/nyarpc-test/nyarpc-test-registry/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/nyarpc-test/nyarpc-test-scanner/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/nyarpc-test/nyarpc-test-scanner/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/nyarpc-test/src/main/java" charset="UTF-8" />

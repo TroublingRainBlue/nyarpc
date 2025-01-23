@@ -1,0 +1,53 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="AutoCloseableResource" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="METHOD_MATCHER_CONFIG" value="java.util.Formatter,format,java.io.Writer,append,com.google.common.base.Preconditions,checkNotNull,org.hibernate.Session,close,java.io.PrintWriter,printf,java.io.PrintStream,printf,java.lang.foreign.Arena,ofAuto,java.lang.foreign.Arena,global,org.apache.curator.framework.CuratorFrameworkFactory.Builder,build" />
+    </inspection_tool>
+    <inspection_tool class="VulnerableLibrariesLocal" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="isIgnoringEnabled" value="true" />
+      <option name="ignoredModules">
+        <list>
+          <option value="nyarpc-registry-zookeeper" />
+          <option value="nyarpc-registry-zookeeper" />
+          <option value="nyarpc-registry-zookeeper" />
+          <option value="nyarpc-registry-zookeeper" />
+          <option value="nyarpc-registry-zookeeper" />
+          <option value="nyarpc-registry-zookeeper" />
+          <option value="nyarpc-registry-zookeeper" />
+          <option value="nyarpc-registry-zookeeper" />
+          <option value="nyarpc-registry-zookeeper" />
+          <option value="nyarpc-registry-zookeeper" />
+        </list>
+      </option>
+      <option name="ignoredPackages">
+        <list>
+          <option value="org.codehaus.jackson:jackson-mapper-asl:1.9.13" />
+          <option value="io.netty:netty:3.10.5.Final" />
+          <option value="com.google.guava:guava:20.0" />
+          <option value="org.apache.zookeeper:zookeeper:3.5.3-beta" />
+          <option value="com.google.guava:guava:32.0.0-jre" />
+          <option value="org.apache.zookeeper:zookeeper:3.9.1" />
+          <option value="commons-io:commons-io:2.11.0" />
+          <option value="org.springframework:spring-context:5.2.13.RELEASE" />
+          <option value="com.fasterxml.jackson.core:jackson-databind:2.10.0" />
+          <option value="org.apache.zookeeper:zookeeper:3.5.7" />
+        </list>
+      </option>
+      <option name="ignoredReasons">
+        <list>
+          <option value="其他" />
+          <option value="其他" />
+          <option value="其他" />
+          <option value="其他" />
+          <option value="其他" />
+          <option value="其他" />
+          <option value="其他" />
+          <option value="其他" />
+          <option value="其他" />
+          <option value="其他" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>

@@ -9,16 +9,11 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>nyarpc-test</artifactId>
+    <artifactId>nyarpc-registry</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>nyarpc-test-scanner</module>
-        <module>nyarpc-test-provider</module>
-        <module>nyarpc-test-comsumer</module>
-        <module>nyarpc-test-comsumer/nyarpc-test-comsumer-codec</module>
-        <module>nyarpc-test-api</module>
-        <module>nyarpc-test-comsumer/nyarpc-test-consumer-native</module>
-        <module>nyarpc-test-registry</module>
+        <module>nyarpc-registry-api</module>
+        <module>nyarpc-registry-zookeeper</module>
     </modules>
 
     <properties>
@@ -26,28 +21,8 @@
         <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
     <dependencies>
-        <dependency>
-            <groupId>org.nya</groupId>
-            <artifactId>nyarpc-common</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.13.2</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.nya</groupId>
-            <artifactId>nyarpc-provider-common</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>org.nya</groupId>
-            <artifactId>nyarpc-provider-native</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
         <dependency>
             <groupId>org.nya</groupId>
             <artifactId>nyarpc-protocol</artifactId>
@@ -55,8 +30,36 @@
         </dependency>
         <dependency>
             <groupId>org.nya</groupId>
-            <artifactId>nyarpc-consumer-common</artifactId>
+            <artifactId>nyarpc-common</artifactId>
             <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.nya</groupId>
+            <artifactId>nyarpc-registry-api</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-framework</artifactId>
+            <version>4.3.0</version>
+        </dependency>
+        <!--https://mvnrepository.com/artifact/org.apache.curator/curator-client -->
+        <dependency>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-client</artifactId>
+            <version>4.3.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.curator/curator-x-discovery -->
+        <dependency>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-x-discovery</artifactId>
+            <version>4.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.2</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 </project>

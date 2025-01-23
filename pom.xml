@@ -20,6 +20,7 @@
         <module>nyarpc-consumer</module>
         <module>nyarpc-proxy</module>
         <module>nyarpc-threadpool</module>
+        <module>nyarpc-registry</module>
     </modules>
 
     <properties>
