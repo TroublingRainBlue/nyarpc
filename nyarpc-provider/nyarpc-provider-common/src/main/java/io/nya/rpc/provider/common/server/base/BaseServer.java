@@ -12,6 +12,9 @@ import io.nya.rpc.codec.RpcDecoder;
 import io.nya.rpc.codec.RpcEncoder;
 import io.nya.rpc.provider.common.RpcProviderHandler;
 import io.nya.rpc.provider.common.server.api.Server;
+import io.nya.rpc.registry.api.RegistryService;
+import io.nya.rpc.registry.api.config.RegistryConfig;
+import io.nya.rpc.registry.zookeeper.ZookeeperRegistryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,23 +25,28 @@ public class BaseServer implements Server {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BaseServer.class);
 
-    //主机域名或者IP地址
+    // 主机域名或者IP地址
     protected String host = "127.0.0.1";
 
-    //端口号
+    // 端口号
     protected int port = 20020;
 
+    // 反射类型
     protected String reflectType = "jdk";
 
     protected Map<String, Object> handlerMap = new HashMap<>();
 
-    public BaseServer(String serverAddress, String reflectType) {
+    // 注册中心相关服务
+    protected RegistryService registryService;
+
+    public BaseServer(String serverAddress, String reflectType, String registryAddr, String registryType) {
         if(!serverAddress.isEmpty()) {
             String[] server = serverAddress.split(":");
             this.host = server[0];
             this.port = Integer.parseInt(server[1]);
-            this.reflectType = reflectType;
         }
+        this.reflectType = reflectType;
+        this.registryService = getRegistryService(registryAddr, registryType);
     }
 
     @Override
@@ -68,5 +76,18 @@ public class BaseServer implements Server {
             bossgroup.shutdownGracefully();
             workergroup.shutdownGracefully();
         }
+    }
+
+    private RegistryService getRegistryService(String registryAddr, String registryType) {
+        // TODO 考虑SPI扩展支持多种注册中心
+        RegistryService registryService = null;
+        try {
+            registryService = new ZookeeperRegistryService();;
+            RegistryConfig config = new RegistryConfig(registryAddr, registryType);
+            registryService.init(config);
+        } catch (Exception e) {
+            LOGGER.error("RPC init server error:{}", e.toString());
+        }
+        return registryService;
     }
 }

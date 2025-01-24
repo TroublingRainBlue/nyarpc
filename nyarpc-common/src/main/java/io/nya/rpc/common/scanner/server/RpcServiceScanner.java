@@ -3,6 +3,8 @@ package io.nya.rpc.common.scanner.server;
 import io.nya.rpc.annotation.RpcService;
 import io.nya.rpc.common.helper.RpcServiceHelper;
 import io.nya.rpc.common.scanner.ClassScanner;
+import io.nya.rpc.protocol.meta.ServiceMetaData;
+import io.nya.rpc.registry.api.RegistryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,7 +24,7 @@ public class RpcServiceScanner extends ClassScanner {
     /**
      * 扫描指定包下的类，并筛选出@RpcService标注的类
      */
-    public static Map<String, Object> doScannerWithRpcServiceAnnotationFilterAndRegistryService(String scanPackage) throws Exception {
+    public static Map<String, Object> doScannerWithRpcServiceAnnotationFilterAndRegistryService(String scanPackage, String host, int port, RegistryService registryService) throws Exception {
         Map<String, Object> handlerMap = new HashMap<>();
         List<String> classNameList = getClassNameList(scanPackage);
 
@@ -37,11 +39,12 @@ public class RpcServiceScanner extends ClassScanner {
                 RpcService rpcService = clazz.getAnnotation(RpcService.class);
                 if (rpcService != null) {
                     // 优先使用interfaceClass,interfaceClass的name为空，再使用interfaceClassName
-                    // 向注册中心注册服务元数据，同时handlerMap标记RpcService注解标注的实例
                     String serviceName = getServiceName(rpcService);
+                    // 向注册中心注册服务元数据
+                    ServiceMetaData serviceMetaData = new ServiceMetaData(serviceName, rpcService.version(), host, port, rpcService.group());
+                    registryService.registry(serviceMetaData);
                     String key = RpcServiceHelper.buildStringKey(serviceName,rpcService.version(), rpcService.group());
                     handlerMap.put(key, clazz.newInstance());
-
                 }
             } catch (Exception e) {
                 LOGGER.error("Scan classes throws exception===>>{}", e.toString());

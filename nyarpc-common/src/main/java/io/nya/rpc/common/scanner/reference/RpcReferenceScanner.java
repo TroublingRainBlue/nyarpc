@@ -38,8 +38,6 @@ public class RpcReferenceScanner extends ClassScanner {
                 Stream.of(fields).forEach(field -> {
                     RpcReference rpcReference = field.getAnnotation(RpcReference.class);
                     if (rpcReference != null) {
-                        // TODO 将@RpcReference标记的接口引入代理对象放入全局缓存
-
                         LOGGER.info("当前标注了@RpcReference注解的类实例名称===>>>{}", clazz.getName());
                         LOGGER.info("@RpcReference注解上标注的信息如下：");
                         LOGGER.info("registryType===>>>{}", rpcReference.registryType());

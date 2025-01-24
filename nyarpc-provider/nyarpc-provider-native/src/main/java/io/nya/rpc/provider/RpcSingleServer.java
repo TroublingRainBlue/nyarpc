@@ -8,10 +8,10 @@ import org.slf4j.LoggerFactory;
 public class RpcSingleServer extends BaseServer {
     private static final Logger LOGGER = LoggerFactory.getLogger(RpcSingleServer.class);
 
-    public RpcSingleServer(String serverAddress, String packageName, String reflectType) {
-        super(serverAddress, reflectType);
+    public RpcSingleServer(String serverAddress, String packageName, String reflectType, String registryAddr, String registryType) {
+        super(serverAddress, reflectType, registryAddr, registryType);
         try {
-            this.handlerMap = RpcServiceScanner.doScannerWithRpcServiceAnnotationFilterAndRegistryService(packageName);
+            this.handlerMap = RpcServiceScanner.doScannerWithRpcServiceAnnotationFilterAndRegistryService(packageName, this.host, this.port, this.registryService);
         } catch (Exception e) {
             LOGGER.error("Rpc Server init error===>>>{}", e.toString());
         }

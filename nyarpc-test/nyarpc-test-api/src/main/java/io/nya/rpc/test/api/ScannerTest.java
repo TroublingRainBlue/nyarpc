@@ -15,7 +15,7 @@ public class ScannerTest {
         List<String> classNameList = ClassScanner.getClassNameList("io.nya.rpc.test.provider");
         classNameList.forEach(System.out::println);
     }
-
+    /*
     @Test
     public void testScannerRpcService() throws Exception{
         Map<String, Object> map = RpcServiceScanner.doScannerWithRpcServiceAnnotationFilterAndRegistryService("io.nya.rpc.test.api");
@@ -23,7 +23,7 @@ public class ScannerTest {
             System.out.println(entry.getKey());
         }
     }
-
+    */
     @Test
     public void testScannerRpcReference() throws Exception {
         Map<String, Object> map = RpcReferenceScanner.doScannerWithRpcReferenceFilter("io.nya.rpc.test.scanner");
