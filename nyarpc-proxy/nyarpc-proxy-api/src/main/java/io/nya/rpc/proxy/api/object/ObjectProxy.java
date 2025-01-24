@@ -7,6 +7,7 @@ import io.nya.rpc.protocol.request.RpcRequest;
 import io.nya.rpc.proxy.api.async.IAsyncObjectProxy;
 import io.nya.rpc.proxy.api.consumer.Consumer;
 import io.nya.rpc.proxy.api.future.RpcFuture;
+import io.nya.rpc.registry.api.RegistryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -57,11 +58,16 @@ public class ObjectProxy<T> implements IAsyncObjectProxy, InvocationHandler {
      */
     private boolean oneway;
 
+    /**
+     * 注册中心
+     */
+    private RegistryService registryService;
+
     public ObjectProxy(Class<T> clazz) {
         this.clazz = clazz;
     }
 
-    public ObjectProxy(Class<T> clazz, String serviceVersion, String serviceGroup, long timeout, Consumer consumer, String serializationType, boolean async, boolean oneway) {
+    public ObjectProxy(Class<T> clazz, String serviceVersion, String serviceGroup, long timeout, Consumer consumer, String serializationType, boolean async, boolean oneway, RegistryService registryService) {
         this.clazz = clazz;
         this.serviceVersion = serviceVersion;
         this.serviceGroup = serviceGroup;
@@ -70,6 +76,7 @@ public class ObjectProxy<T> implements IAsyncObjectProxy, InvocationHandler {
         this.serializationType = serializationType;
         this.async = async;
         this.oneway = oneway;
+        this.registryService = registryService;
     }
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
@@ -104,7 +111,7 @@ public class ObjectProxy<T> implements IAsyncObjectProxy, InvocationHandler {
         logger.debug(method.getDeclaringClass().getName());
         logger.debug(method.getName());
 
-        RpcFuture future = this.consumer.sendRequest(protocol);
+        RpcFuture future = this.consumer.sendRequest(protocol, registryService);
         return future == null ? null : timeout > 0 ? future.get(timeout, TimeUnit.MILLISECONDS) : future.get();
     }
 
@@ -113,7 +120,7 @@ public class ObjectProxy<T> implements IAsyncObjectProxy, InvocationHandler {
         RpcProtocol<RpcRequest> protocol = creatRequest(this.clazz.getName(), methodName, args);
         RpcFuture future = null;
         try {
-            future = this.consumer.sendRequest(protocol);
+            future = this.consumer.sendRequest(protocol, registryService);
         } catch (Exception e) {
             logger.error("async all throw exception:{}", e.toString());
         }

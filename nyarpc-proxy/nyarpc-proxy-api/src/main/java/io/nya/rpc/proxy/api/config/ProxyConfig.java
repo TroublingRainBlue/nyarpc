@@ -1,6 +1,7 @@
 package io.nya.rpc.proxy.api.config;
 
 import io.nya.rpc.proxy.api.consumer.Consumer;
+import io.nya.rpc.registry.api.RegistryService;
 
 import java.io.Serializable;
 
@@ -47,7 +48,12 @@ public class ProxyConfig<T> implements Serializable {
      */
     private boolean oneway;
 
-    public ProxyConfig(Class<T> clazz, String serviceVersion, String serviceGroup, long timeout, Consumer consumer, String serializationType, boolean async, boolean oneway) {
+    /**
+     * 注册中心
+     */
+    private RegistryService registryService;
+
+    public ProxyConfig(Class<T> clazz, String serviceVersion, String serviceGroup, long timeout, Consumer consumer, String serializationType, boolean async, boolean oneway, RegistryService registryService) {
         this.clazz = clazz;
         this.serviceVersion = serviceVersion;
         this.serviceGroup = serviceGroup;
@@ -56,6 +62,11 @@ public class ProxyConfig<T> implements Serializable {
         this.async = async;
         this.serializationType = serializationType;
         this.oneway = oneway;
+        this.registryService = registryService;
+    }
+
+    public void setRegistryService(RegistryService registryService) {
+        this.registryService = registryService;
     }
 
     public void setSerializationType(String serializationType) {
@@ -120,5 +131,9 @@ public class ProxyConfig<T> implements Serializable {
 
     public boolean getOneway() {
         return oneway;
+    }
+
+    public RegistryService getRegistryService() {
+        return registryService;
     }
 }
