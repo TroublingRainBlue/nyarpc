@@ -5,28 +5,17 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.nya</groupId>
-        <artifactId>nyarpc-registry</artifactId>
+        <artifactId>nyarpc</artifactId>
         <version>1.0-SNAPSHOT</version>
+        <relativePath>../../pom.xml</relativePath>
     </parent>
 
-    <artifactId>nyarpc-registry-zookeeper</artifactId>
+    <artifactId>nyarpc-loadbalance-api</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    <dependencies>
-        <dependency>
-            <groupId>org.nya</groupId>
-            <artifactId>nyarpc-registry-api</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>org.nya</groupId>
-            <artifactId>nyarpc-common</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
 
-    </dependencies>
 </project>

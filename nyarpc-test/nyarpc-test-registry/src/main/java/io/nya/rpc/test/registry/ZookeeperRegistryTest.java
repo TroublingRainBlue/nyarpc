@@ -36,7 +36,7 @@ public class ZookeeperRegistryTest {
 
     @Test
     public void testDiscovery() throws Exception {
-        this.registryService.discover(RegistryService.class.getName());
+        this.registryService.discover(RegistryService.class.getName(), 0);
     }
 
     @Test

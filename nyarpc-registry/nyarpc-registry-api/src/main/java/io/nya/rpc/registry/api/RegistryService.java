@@ -21,10 +21,11 @@ public interface RegistryService {
     /**
      * 服务发现
      * @param serviceName 服务名称
+     * @param invokeHashCode 负载均衡相关
      * @return 服务元数据
      * @throws Exception 抛出异常
      */
-    ServiceMetaData discover(String serviceName) throws Exception;
+    ServiceMetaData discover(String serviceName, int invokeHashCode) throws Exception;
 
     /**
      * 服务销毁

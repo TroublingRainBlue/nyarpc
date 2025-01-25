@@ -56,7 +56,8 @@ public class RpcConsumer implements Consumer {
         RpcRequest request = protocol.getBody();
         String serviceKey = RpcServiceHelper.buildStringKey(request.getClassName(), request.getVersion(), request.getGroup());
         Object[] params = request.getParams();
-        ServiceMetaData serviceMetaData = registryService.discover(serviceKey);
+        int invokHashCode = (params == null || params.length <= 0) ? serviceKey.hashCode() : params[0].hashCode();
+        ServiceMetaData serviceMetaData = registryService.discover(serviceKey, invokHashCode);
         if(serviceMetaData != null) {
             RpcConsumerHandler handler = RpcConsumerHandlerHelper.get(serviceMetaData);
             // 缓存中没有ClientHandler

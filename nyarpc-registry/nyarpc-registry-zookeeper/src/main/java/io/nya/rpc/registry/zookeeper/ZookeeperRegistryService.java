@@ -1,6 +1,8 @@
 package io.nya.rpc.registry.zookeeper;
 
 import io.nya.rpc.common.helper.RpcServiceHelper;
+import io.nya.rpc.loadbalance.api.LoadBalance;
+import io.nya.rpc.loadbalance.random.RandomLoadBalance;
 import io.nya.rpc.protocol.meta.ServiceMetaData;
 import io.nya.rpc.registry.api.RegistryService;
 import io.nya.rpc.registry.api.config.RegistryConfig;
@@ -22,7 +24,7 @@ public class ZookeeperRegistryService implements RegistryService {
     public static final int MAX_RETRIES = 3;
     public static final String ZK_BASE_PATH = "/nyarpc";
     private ServiceDiscovery<ServiceMetaData> serviceDiscovery;
-
+    private LoadBalance<ServiceInstance<ServiceMetaData>> loadBalance;
     @Override
     public void registry(ServiceMetaData serviceMetaData) throws Exception {
         ServiceInstance<ServiceMetaData> serviceInstance = ServiceInstance
@@ -47,9 +49,9 @@ public class ZookeeperRegistryService implements RegistryService {
     }
 
     @Override
-    public ServiceMetaData discover(String serviceName) throws Exception {
+    public ServiceMetaData discover(String serviceName, int invokeHashCode) throws Exception {
         Collection<ServiceInstance<ServiceMetaData>> serviceInstances = serviceDiscovery.queryForInstances(serviceName);
-        ServiceInstance<ServiceMetaData> instance = selectOneServiceInstance((List<ServiceInstance<ServiceMetaData>>)serviceInstances);
+        ServiceInstance<ServiceMetaData> instance = loadBalance.select((List<ServiceInstance<ServiceMetaData>>) serviceInstances, invokeHashCode);
         if(instance == null) {
             return null;
         }
@@ -65,6 +67,7 @@ public class ZookeeperRegistryService implements RegistryService {
     public void init(RegistryConfig registryConfig) throws Exception {
         CuratorFramework client = CuratorFrameworkFactory.newClient(registryConfig.getRegistryAddr(), new ExponentialBackoffRetry(BASE_SLEEP_TIME_MS, MAX_RETRIES));
         client.start();
+        this.loadBalance = new RandomLoadBalance<>();
         JsonInstanceSerializer<ServiceMetaData> serializer = new JsonInstanceSerializer<>(ServiceMetaData.class);
         this.serviceDiscovery = ServiceDiscoveryBuilder.builder(ServiceMetaData.class)
                 .client(client)
@@ -72,14 +75,5 @@ public class ZookeeperRegistryService implements RegistryService {
                 .basePath(ZK_BASE_PATH)
                 .build();
         this.serviceDiscovery.start();
-    }
-
-    private ServiceInstance<ServiceMetaData> selectOneServiceInstance(List<ServiceInstance<ServiceMetaData>> instances) {
-        if(instances == null || instances.isEmpty()) {
-            return null;
-        }
-        Random random = new Random();
-        int x = random.nextInt(instances.size());
-        return instances.get(x);
     }
 }
