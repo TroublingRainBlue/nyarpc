@@ -24,6 +24,7 @@
         <module>nyarpc-loadbalance</module>
         <module>nyarpc-loadbalance/nyarpc-loadbalance-api</module>
         <module>nyarpc-loadbalance/nyarpc-loadbalance-random</module>
+        <module>nyarpc-spi</module>
     </modules>
 
     <properties>

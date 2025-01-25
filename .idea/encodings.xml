@@ -45,6 +45,8 @@
     <file url="file://$PROJECT_DIR$/nyarpc-serialization/nyarpc-serialization-jdk/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/nyarpc-serialization/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/nyarpc-serialization/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/nyarpc-spi/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/nyarpc-spi/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/nyarpc-test/nyarpc-test-api/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/nyarpc-test/nyarpc-test-api/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/nyarpc-test/nyarpc-test-comsumer/nyarpc-test-comsumer-codec/src/main/java" charset="UTF-8" />
