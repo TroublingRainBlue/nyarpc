@@ -48,12 +48,12 @@ public class FSTSerialization implements Serialization {
         if(data == null) {
             throw new SerializationException("Deserialized data is null ");
         }
-        T obj = null;
         try (ByteArrayInputStream in = new ByteArrayInputStream(data);FSTObjectInput fstIn = conf.getObjectInput(in)) {
-            obj = (T) fstIn.readObject();
+            @SuppressWarnings("unchecked")
+            T obj = (T) fstIn.readObject();
+            return obj;
         } catch (Exception e) {
             throw new SerializationException(e, e.getMessage());
         }
-        return obj;
     }
 }

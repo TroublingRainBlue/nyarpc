@@ -17,6 +17,7 @@
         <module>nyarpc-serialization-json</module>
         <module>nyarpc-serialization-hessian2</module>
         <module>nyarpc-serialization-fst</module>
+        <module>nyarpc-serialization-kryo</module>
     </modules>
 
     <properties>
