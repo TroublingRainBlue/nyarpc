@@ -13,14 +13,9 @@ public class ConsumerNativeTest {
     RpcClient client;
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         RpcClient rpcClient = new RpcClient("127.0.0.1:2181", "zookeeper","1.0.0", "nya", "jdk", 2000, false, false);
-        /*
-        DemoService demoService = rpcClient.create(DemoService.class);
-        String result = demoService.hello("Nagisaki Soyo");
-        System.out.println("返回的结果===》" + result);
-        */
 
         IAsyncObjectProxy demoService = rpcClient.creatAsync(DemoService.class);
-        RpcFuture future = demoService.call("hello", "Nagisaki Soyo");
+        RpcFuture future = demoService.call("hello", "Nagasaki Soyo");
         System.out.println("返回的结果===》" + future.get());
         rpcClient.shutdown();
     }
