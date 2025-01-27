@@ -22,7 +22,7 @@ public class ConsumerNativeTest {
 
     @Before
     public void clientInit() {
-        this.client = new RpcClient("127.0.0.1:2181", "zookeeper","1.0.0", "nya", "json", 2000, false, false);
+        this.client = new RpcClient("127.0.0.1:2181", "zookeeper","1.0.0", "nya", "fst", 2000, false, false);
     }
 
     @Test

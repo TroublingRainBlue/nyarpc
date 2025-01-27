@@ -9,6 +9,16 @@ public class RpcConstants {
     public static final String REFLECT_TYPE_JDK = "jdk";
     // 通过CGLib动态代理进行方法调用
     public static final String REFLECT_TYPE_CGLib = "cglib";
-
+    // protostuff 序列化
+    public static final String SERIALIZATION_PROTOSTUFF = "protostuff";
+    // FST 序列化
+    public static final String SERIALIZATION_FST = "fst";
+    // hessian2 序列化
+    public static final String SERIALIZATION_HESSIAN2 = "hessian2";
+    // jdk 序列化
     public static final String SERIALIZATION_JDK = "jdk";
+    // json 序列化
+    public static final String SERIALIZATION_JSON = "json";
+    // kryo 序列化
+    public static final String SERIALIZATION_KRYO = "kryo";
 }

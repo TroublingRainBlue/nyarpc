@@ -5,35 +5,29 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.nya</groupId>
-        <artifactId>nyarpc</artifactId>
+        <artifactId>nyarpc-serialization</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>nyarpc-serialization</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>nyarpc-serialization-api</module>
-        <module>nyarpc-serialization-jdk</module>
-        <module>nyarpc-serialization-json</module>
-        <module>nyarpc-serialization-hessian2</module>
-        <module>nyarpc-serialization-fst</module>
-    </modules>
+    <artifactId>nyarpc-serialization-fst</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
     <dependencies>
         <dependency>
-            <groupId>org.nya</groupId>
-            <artifactId>nyarpc-spi</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <groupId>de.ruedigermoeller</groupId>
+            <artifactId>fst</artifactId>
+            <version>2.57</version>
         </dependency>
         <dependency>
             <groupId>org.nya</groupId>
-            <artifactId>nyarpc-constants</artifactId>
+            <artifactId>nyarpc-serialization-api</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
+
 </project>
