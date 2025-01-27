@@ -43,6 +43,8 @@
     <file url="file://$PROJECT_DIR$/nyarpc-serialization/nyarpc-serialization-api/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/nyarpc-serialization/nyarpc-serialization-jdk/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/nyarpc-serialization/nyarpc-serialization-jdk/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/nyarpc-serialization/nyarpc-serialization-json/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/nyarpc-serialization/nyarpc-serialization-json/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/nyarpc-serialization/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/nyarpc-serialization/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/nyarpc-spi/src/main/java" charset="UTF-8" />
