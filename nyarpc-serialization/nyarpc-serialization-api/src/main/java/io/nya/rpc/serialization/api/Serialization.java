@@ -1,5 +1,9 @@
 package io.nya.rpc.serialization.api;
 
+import io.nya.rpc.constants.RpcConstants;
+import io.nya.rpc.spi.annotation.SPI;
+
+@SPI(RpcConstants.SERIALIZATION_JDK)
 public interface Serialization {
 
     /**

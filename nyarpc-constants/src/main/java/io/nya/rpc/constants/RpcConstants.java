@@ -9,4 +9,6 @@ public class RpcConstants {
     public static final String REFLECT_TYPE_JDK = "jdk";
     // 通过CGLib动态代理进行方法调用
     public static final String REFLECT_TYPE_CGLib = "cglib";
+
+    public static final String SERIALIZATION_JDK = "jdk";
 }

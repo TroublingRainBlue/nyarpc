@@ -32,5 +32,10 @@
             <artifactId>nyarpc-protocol</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>org.nya</groupId>
+            <artifactId>nyarpc-spi</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 </project>
