@@ -14,7 +14,7 @@ public class ConsumerNativeTest {
 
     @Before
     public void clientInit() {
-        this.client = new RpcClient("127.0.0.1:2181", "zookeeper", "jdk","1.0.0", "nya", "protostuff", 2000, false, false);
+        this.client = new RpcClient("127.0.0.1:2181", "zookeeper", "cglib","1.0.0", "nya", "protostuff", 2000, false, false);
     }
 
     @Test

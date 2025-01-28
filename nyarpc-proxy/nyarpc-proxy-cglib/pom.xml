@@ -5,11 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.nya</groupId>
-        <artifactId>nyarpc-consumer</artifactId>
+        <artifactId>nyarpc</artifactId>
         <version>1.0-SNAPSHOT</version>
+        <relativePath>../../pom.xml</relativePath>
     </parent>
 
-    <artifactId>nyarpc-consumer-common</artifactId>
+    <artifactId>nyarpc-proxy-cglib</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -18,27 +19,14 @@
     </properties>
     <dependencies>
         <dependency>
-            <groupId>org.nya</groupId>
-            <artifactId>nyarpc-proxy-jdk</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
+            <groupId>cglib</groupId>
+            <artifactId>cglib</artifactId>
+            <version>3.2.2</version>
         </dependency>
         <dependency>
             <groupId>org.nya</groupId>
-            <artifactId>nyarpc-proxy-cglib</artifactId>
+            <artifactId>nyarpc-proxy-api</artifactId>
             <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>org.nya</groupId>
-            <artifactId>nyarpc-codec</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>org.nya</groupId>
-            <artifactId>nyarpc-registry-zookeeper</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
         </dependency>
     </dependencies>
-
 </project>
