@@ -26,6 +26,7 @@
         <module>nyarpc-loadbalance/nyarpc-loadbalance-random</module>
         <module>nyarpc-spi</module>
         <module>nyarpc-proxy/nyarpc-proxy-cglib</module>
+        <module>nyarpc-proxy/nyarpc-proxy-javaassist</module>
     </modules>
 
     <properties>
