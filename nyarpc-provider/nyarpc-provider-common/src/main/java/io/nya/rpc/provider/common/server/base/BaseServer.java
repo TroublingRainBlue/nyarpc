@@ -10,6 +10,7 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.nya.rpc.codec.RpcDecoder;
 import io.nya.rpc.codec.RpcEncoder;
+import io.nya.rpc.constants.RpcConstants;
 import io.nya.rpc.provider.common.RpcProviderHandler;
 import io.nya.rpc.provider.common.server.api.Server;
 import io.nya.rpc.registry.api.RegistryService;
@@ -32,21 +33,21 @@ public class BaseServer implements Server {
     protected int port = 20020;
 
     // 反射类型
-    protected String reflectType = "jdk";
+    protected String reflectType = RpcConstants.REFLECT_TYPE_JDK;
 
     protected Map<String, Object> handlerMap = new HashMap<>();
 
     // 注册中心相关服务
     protected RegistryService registryService;
 
-    public BaseServer(String serverAddress, String reflectType, String registryAddr, String registryType) {
+    public BaseServer(String serverAddress, String reflectType, String registryAddr, String registryType, String loadBalance) {
         if(!serverAddress.isEmpty()) {
             String[] server = serverAddress.split(":");
             this.host = server[0];
             this.port = Integer.parseInt(server[1]);
         }
         this.reflectType = reflectType;
-        this.registryService = getRegistryService(registryAddr, registryType);
+        this.registryService = getRegistryService(registryAddr, registryType, loadBalance);
     }
 
     @Override
@@ -78,12 +79,12 @@ public class BaseServer implements Server {
         }
     }
 
-    private RegistryService getRegistryService(String registryAddr, String registryType) {
+    private RegistryService getRegistryService(String registryAddr, String registryType, String loadBalance) {
         // TODO 考虑SPI扩展支持多种注册中心
         RegistryService registryService = null;
         try {
             registryService = new ZookeeperRegistryService();;
-            RegistryConfig config = new RegistryConfig(registryAddr, registryType);
+            RegistryConfig config = new RegistryConfig(registryAddr, registryType, loadBalance);
             registryService.init(config);
         } catch (Exception e) {
             LOGGER.error("RPC init server error:{}", e.toString());

@@ -15,9 +15,15 @@ public class RegistryConfig implements Serializable {
      */
     private String registryType;
 
-    public RegistryConfig(String registryAddress, String registryType) {
+    /**
+     * 负载均衡类型
+     */
+    private String loadBalance;
+
+    public RegistryConfig(String registryAddress, String registryType, String loadBalance) {
         this.registryAddress = registryAddress;
         this.registryType = registryType;
+        this.loadBalance = loadBalance;
     }
 
     public void setRegistryAddr(String registryAddress) {
@@ -28,11 +34,19 @@ public class RegistryConfig implements Serializable {
         this.registryType = registryType;
     }
 
+    public void setLoadBalance(String loadBalance) {
+        this.loadBalance = loadBalance;
+    }
+
     public String getRegistryAddr() {
         return registryAddress;
     }
 
     public String getRegistryType() {
         return registryType;
+    }
+
+    public String getLoadBalance() {
+        return loadBalance;
     }
 }

@@ -56,14 +56,14 @@ public class RpcClient {
      */
     private String proxy;
 
-    public RpcClient(String registryAddr, String registryType, String proxy, String serviceVersion, String serviceGroup, String serializationType, long timeout, boolean async, boolean oneway) {
+    public RpcClient(String registryAddr, String registryType, String loadbalance, String proxy, String serviceVersion, String serviceGroup, String serializationType, long timeout, boolean async, boolean oneway) {
         this.oneway = oneway;
         this.timeout = timeout;
         this.serviceVersion = serviceVersion;
         this.serializationType = serializationType;
         this.serviceGroup = serviceGroup;
         this.async = async;
-        this.registryService = getRegistryService(registryAddr, registryType);
+        this.registryService = getRegistryService(registryAddr, registryType, loadbalance);
         this.proxy = proxy;
     }
 
@@ -81,12 +81,12 @@ public class RpcClient {
         RpcConsumer.getInstance().close();
     }
 
-    private RegistryService getRegistryService(String registryAddr, String registryType) {
+    private RegistryService getRegistryService(String registryAddr, String registryType, String loadbalance) {
         // TODO 考虑SPI扩展支持多种注册中心
         RegistryService registryService = null;
         try {
             registryService = new ZookeeperRegistryService();;
-            RegistryConfig config = new RegistryConfig(registryAddr, registryType);
+            RegistryConfig config = new RegistryConfig(registryAddr, registryType, loadbalance);
             registryService.init(config);
         } catch (Exception e) {
             logger.error("RPC init server error:{}", e.toString());

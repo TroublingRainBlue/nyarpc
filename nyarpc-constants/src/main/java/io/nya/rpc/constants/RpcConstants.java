@@ -29,4 +29,6 @@ public class RpcConstants {
     public static final String PROXY_CGLIB = "cglib";
     // javassist 动态代理生成请求对象
     public static final String PROXY_JAVASSIST = "javassist";
+    // 随机负载均衡策略
+    public static final String LOADBALANCE_RANDOM = "random";
 }
