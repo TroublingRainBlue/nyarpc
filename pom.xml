@@ -27,6 +27,7 @@
         <module>nyarpc-spi</module>
         <module>nyarpc-proxy/nyarpc-proxy-cglib</module>
         <module>nyarpc-proxy/nyarpc-proxy-javaassist</module>
+        <module>nyarpc-reflect</module>
     </modules>
 
     <properties>

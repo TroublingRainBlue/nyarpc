@@ -43,5 +43,20 @@
             <artifactId>nyarpc-registry-zookeeper</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>org.nya</groupId>
+            <artifactId>nyarpc-reflect-jdk</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.nya</groupId>
+            <artifactId>nyarpc-reflect-cglib</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.nya</groupId>
+            <artifactId>nyarpc-reflect-javassist</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 </project>

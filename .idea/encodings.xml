@@ -37,6 +37,16 @@
     <file url="file://$PROJECT_DIR$/nyarpc-proxy/nyarpc-proxy-jdk/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/nyarpc-proxy/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/nyarpc-proxy/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/nyarpc-reflect/nyarpc-reflect-api/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/nyarpc-reflect/nyarpc-reflect-api/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/nyarpc-reflect/nyarpc-reflect-cglib/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/nyarpc-reflect/nyarpc-reflect-cglib/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/nyarpc-reflect/nyarpc-reflect-javassist/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/nyarpc-reflect/nyarpc-reflect-javassist/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/nyarpc-reflect/nyarpc-reflect-jdk/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/nyarpc-reflect/nyarpc-reflect-jdk/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/nyarpc-reflect/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/nyarpc-reflect/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/nyarpc-registry/nyarpc-registry-api/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/nyarpc-registry/nyarpc-registry-api/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/nyarpc-registry/nyarpc-registry-zookeeper/src/main/java" charset="UTF-8" />

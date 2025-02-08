@@ -1,0 +1,1 @@
+javassist=io.nya.rpc.reflect.javassist.JavassistReflectInvoker

@@ -4,21 +4,18 @@ import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.nya.rpc.common.helper.RpcServiceHelper;
-import io.nya.rpc.constants.RpcConstants;
 import io.nya.rpc.protocol.RpcProtocol;
 import io.nya.rpc.protocol.enumerate.RpcStatus;
 import io.nya.rpc.protocol.enumerate.RpcType;
 import io.nya.rpc.protocol.header.RpcHeader;
 import io.nya.rpc.protocol.request.RpcRequest;
 import io.nya.rpc.protocol.response.RpcResponse;
+import io.nya.rpc.reflect.api.ReflectInvoker;
+import io.nya.rpc.spi.ExtensionLoader;
 import io.nya.rpc.threadpool.ServerThreadPool;
-import net.sf.cglib.reflect.FastClass;
-import net.sf.cglib.reflect.FastMethod;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.Map;
 
 public class RpcProviderHandler extends SimpleChannelInboundHandler<RpcProtocol<RpcRequest>> {
@@ -27,11 +24,11 @@ public class RpcProviderHandler extends SimpleChannelInboundHandler<RpcProtocol<
 
     private final Map<String, Object> handlerMap;
 
-    private String reflectType;
+    private ReflectInvoker reflectInvoker;
 
     public RpcProviderHandler(Map<String, Object> handlerMap, String reflectType) {
         this.handlerMap = handlerMap;
-        this.reflectType = reflectType;
+        this.reflectInvoker = ExtensionLoader.getExtension(ReflectInvoker.class, reflectType);
     }
 
     @Override
@@ -64,7 +61,7 @@ public class RpcProviderHandler extends SimpleChannelInboundHandler<RpcProtocol<
         });
     }
 
-    private Object handler(RpcRequest request) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    private Object handler(RpcRequest request) throws Throwable {
         String serviceKey = RpcServiceHelper.buildStringKey(request.getClassName(), request.getVersion(), request.getGroup());
 
         // 获取调用的类
@@ -76,27 +73,6 @@ public class RpcProviderHandler extends SimpleChannelInboundHandler<RpcProtocol<
         Class<?>[] parameterTypes= request.getParameterTypes();
         Object[] params = request.getParams();
 
-        switch (this.reflectType) {
-            case RpcConstants.REFLECT_TYPE_JDK:
-                return invokeJdkMethod(serviceBean, clazz, methodName, parameterTypes, params);
-            case  RpcConstants.REFLECT_TYPE_CGLib:
-                return invokeJCGlibMethod(serviceBean, clazz, methodName, parameterTypes, params);
-            default:
-                throw new IllegalArgumentException("not support reflect type");
-        }
-    }
-
-    private Object invokeJdkMethod(Object serviceBean ,Class<?> clazz,String methodName, Class<?>[] parameterTypes, Object[] params) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        // LOGGER.info("jdk reflect...");
-        Method method = clazz.getMethod(methodName, parameterTypes);
-        method.setAccessible(true);
-        return method.invoke(serviceBean, params);
-    }
-
-    private Object invokeJCGlibMethod(Object serviceBean ,Class<?> clazz,String methodName, Class<?>[] parameterTypes, Object[] params) throws InvocationTargetException {
-        // LOGGER.info("cglib...");
-        FastClass serviceFastClass = FastClass.create(clazz);
-        FastMethod method = serviceFastClass.getMethod(methodName, parameterTypes);
-        return method.invoke(serviceBean, params);
+        return reflectInvoker.invokeMethod(serviceBean, clazz, methodName, parameterTypes, params);
     }
 }
