@@ -9,6 +9,8 @@ public class RpcConstants {
     public static final String REFLECT_TYPE_JDK = "jdk";
     // 通过CGLib动态代理进行方法调用
     public static final String REFLECT_TYPE_CGLib = "cglib";
+    // 通过javassist进行方法调用
+    public static final String REFLECT_TYPE_JAVASSIST = "javassist";
     // protostuff 序列化
     public static final String SERIALIZATION_PROTOSTUFF = "protostuff";
     // FST 序列化
@@ -21,4 +23,10 @@ public class RpcConstants {
     public static final String SERIALIZATION_JSON = "json";
     // kryo 序列化
     public static final String SERIALIZATION_KRYO = "kryo";
+    // jdk 动态代理生成请求对象
+    public static final String PROXY_JDK = "jdk";
+    // cglib 动态代理生成请求对象
+    public static final String PROXY_CGLIB = "cglib";
+    // javassist 动态代理生成请求对象
+    public static final String PROXY_JAVASSIST = "javassist";
 }

@@ -1,5 +1,6 @@
 package io.nya.rpc.test.consumer;
 
+import io.nya.rpc.constants.RpcConstants;
 import io.nya.rpc.consumer.RpcClient;
 import io.nya.rpc.proxy.api.async.IAsyncObjectProxy;
 import io.nya.rpc.proxy.api.future.RpcFuture;
@@ -14,7 +15,7 @@ public class ConsumerNativeTest {
 
     @Before
     public void clientInit() {
-        this.client = new RpcClient("127.0.0.1:2181", "zookeeper", "javassist","1.0.0", "nya", "protostuff", 2000, false, false);
+        this.client = new RpcClient("127.0.0.1:2181", "zookeeper", RpcConstants.PROXY_JAVASSIST,"1.0.0", "nya", "protostuff", 2000, false, false);
     }
 
     @Test
