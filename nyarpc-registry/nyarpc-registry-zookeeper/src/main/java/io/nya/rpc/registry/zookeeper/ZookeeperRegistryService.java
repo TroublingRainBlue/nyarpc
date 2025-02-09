@@ -65,7 +65,6 @@ public class ZookeeperRegistryService implements RegistryService {
     public void init(RegistryConfig registryConfig) throws Exception {
         CuratorFramework client = CuratorFrameworkFactory.newClient(registryConfig.getRegistryAddr(), new ExponentialBackoffRetry(BASE_SLEEP_TIME_MS, MAX_RETRIES));
         client.start();
-        this.loadBalance = ExtensionLoader.getExtension(LoadBalance.class, registryConfig.getLoadBalance());
         JsonInstanceSerializer<ServiceMetaData> serializer = new JsonInstanceSerializer<>(ServiceMetaData.class);
         this.serviceDiscovery = ServiceDiscoveryBuilder.builder(ServiceMetaData.class)
                 .client(client)
@@ -73,5 +72,6 @@ public class ZookeeperRegistryService implements RegistryService {
                 .basePath(ZK_BASE_PATH)
                 .build();
         this.serviceDiscovery.start();
+        this.loadBalance = ExtensionLoader.getExtension(LoadBalance.class, registryConfig.getLoadBalance());
     }
 }

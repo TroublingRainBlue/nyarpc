@@ -15,7 +15,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class RpcConsumerHandler extends SimpleChannelInboundHandler<RpcProtocol<RpcResponse>> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(RpcConsumerHandler.class);
+    // private static final Logger LOGGER = LoggerFactory.getLogger(RpcConsumerHandler.class);
     private SocketAddress remotePeer;
     private Channel channel;
     private Map<Long, RpcFuture> penddingMap = new ConcurrentHashMap<>();
