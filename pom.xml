@@ -30,6 +30,7 @@
         <module>nyarpc-reflect</module>
         <module>nyarpc-loadbalance/nyarpc-loadbalance-randomweight</module>
         <module>nyarpc-loadbalance/nyarpc-loadbalance-robin</module>
+        <module>nyarpc-loadbalance/nyarpc-loadbalance-robinweight</module>
     </modules>
 
     <properties>

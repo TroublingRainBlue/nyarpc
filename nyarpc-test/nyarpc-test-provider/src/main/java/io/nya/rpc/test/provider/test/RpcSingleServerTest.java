@@ -24,7 +24,7 @@ public class RpcSingleServerTest {
 
     @Test
     public void javassistReflectInvokerTest() {
-        RpcSingleServer server = new RpcSingleServer("127.0.0.1:27880", "io.nya.rpc.test", RpcConstants.REFLECT_TYPE_JAVASSIST, "127.0.0.1:2181", "zookeeper", "random");
+        RpcSingleServer server = new RpcSingleServer("127.0.0.1:27880", "io.nya.rpc.test", RpcConstants.REFLECT_TYPE_JAVASSIST, "127.0.0.1:2181", "zookeeper", RpcConstants.LOADBALANCE_RANDOM_WEIGHT);
         server.startNettyServer();
     }
 }

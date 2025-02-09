@@ -15,7 +15,7 @@ public class ConsumerNativeTest {
 
     @Before
     public void clientInit() {
-        this.client = new RpcClient("127.0.0.1:2181", "zookeeper", RpcConstants.LOADBALANCE_ROBIN, RpcConstants.PROXY_JAVASSIST,"1.0.0", "nya", "protostuff", 2000, false, false);
+        this.client = new RpcClient("127.0.0.1:2181", "zookeeper", RpcConstants.LOADBALANCE_ROBIN_WEIGHT, RpcConstants.PROXY_JAVASSIST,"1.0.0", "nya", "protostuff", 2000, false, false);
     }
 
     @Test
