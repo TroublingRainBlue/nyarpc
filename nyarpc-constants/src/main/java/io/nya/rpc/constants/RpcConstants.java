@@ -2,7 +2,7 @@ package io.nya.rpc.constants;
 
 public class RpcConstants {
     // 魔数
-    public static final short MAGIC = 1178;
+    public static final short MAGIC = 0x1234;
     // Header长度
     public static final int HEADER_TOTAL_LEN = 32;
     // 通过反射进行方法调用
@@ -37,4 +37,6 @@ public class RpcConstants {
     public static final String LOADBALANCE_ROBIN = "robin";
     // 加权轮询负载均衡策略
     public static final String LOADBALANCE_ROBIN_WEIGHT = "robinweight";
+    // hash 负载均衡策略
+    public static final String LOADBALANCE_HASH = "hash";
 }

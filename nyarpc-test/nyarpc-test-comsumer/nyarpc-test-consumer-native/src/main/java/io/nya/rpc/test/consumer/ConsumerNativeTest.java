@@ -15,14 +15,14 @@ public class ConsumerNativeTest {
 
     @Before
     public void clientInit() {
-        this.client = new RpcClient("127.0.0.1:2181", "zookeeper", RpcConstants.LOADBALANCE_ROBIN_WEIGHT, RpcConstants.PROXY_JAVASSIST,"1.0.0", "nya", "protostuff", 2000, false, false);
+        this.client = new RpcClient("127.0.0.1:2181", "zookeeper", RpcConstants.LOADBALANCE_HASH, RpcConstants.PROXY_JAVASSIST,"1.0.0", "nya", "protostuff", 2000, false, false);
     }
 
     @Test
     public void testInterfaceRpc() {
         DemoService demoService = client.create(DemoService.class);
         String result = demoService.hello("Soyo Nagasaki");
-        System.out.println("返回的结果===》" + result);
+        System.out.println("result ===>>" + result);
         client.shutdown();
     }
 
@@ -30,7 +30,7 @@ public class ConsumerNativeTest {
     public void testInterfaceRpcAsync() throws ExecutionException, InterruptedException {
         IAsyncObjectProxy demoService = client.creatAsync(DemoService.class);
         RpcFuture future = demoService.call("hello", "sakiko");
-        System.out.println("返回的结果===》" + future.get());
+        System.out.println("result ===>>" + future.get());
         client.shutdown();
     }
 }

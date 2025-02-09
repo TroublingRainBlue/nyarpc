@@ -31,6 +31,7 @@
         <module>nyarpc-loadbalance/nyarpc-loadbalance-randomweight</module>
         <module>nyarpc-loadbalance/nyarpc-loadbalance-robin</module>
         <module>nyarpc-loadbalance/nyarpc-loadbalance-robinweight</module>
+        <module>nyarpc-loadbalance/nyarpc-loadbalance-hash</module>
     </modules>
 
     <properties>
