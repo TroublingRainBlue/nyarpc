@@ -17,6 +17,8 @@
     <file url="file://$PROJECT_DIR$/nyarpc-loadbalance/nyarpc-loadbalance-api/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/nyarpc-loadbalance/nyarpc-loadbalance-hash/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/nyarpc-loadbalance/nyarpc-loadbalance-hash/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/nyarpc-loadbalance/nyarpc-loadbalance-hashweight/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/nyarpc-loadbalance/nyarpc-loadbalance-hashweight/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/nyarpc-loadbalance/nyarpc-loadbalance-random/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/nyarpc-loadbalance/nyarpc-loadbalance-random/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/nyarpc-loadbalance/nyarpc-loadbalance-randomweight/src/main/java" charset="UTF-8" />

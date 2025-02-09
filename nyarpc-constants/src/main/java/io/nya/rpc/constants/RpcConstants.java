@@ -39,4 +39,6 @@ public class RpcConstants {
     public static final String LOADBALANCE_ROBIN_WEIGHT = "robinweight";
     // hash 负载均衡策略
     public static final String LOADBALANCE_HASH = "hash";
+    // 加权hash 负载均衡策略
+    public static final String LOADBALANCE_HASH_WEIGHT = "hashweight";
 }
