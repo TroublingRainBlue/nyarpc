@@ -43,4 +43,6 @@ public class RpcConstants {
     public static final String LOADBALANCE_HASH_WEIGHT = "hashweight";
     // Ip Hash 负载均衡策略
     public static final String LOADBALANCE_IP_HASH = "iphash";
+    // 基于zookeeper的一致性Hash 负载均衡策略
+    public static final String LOADBALANCE_ZK_CONSISTEN_HASH = "zkconsistenhash";
 }

@@ -1,0 +1,1 @@
+zkconsistenhash=io.nya.rpc.loadbalance.zookeeper.ZKConsistenHashLoadBalance

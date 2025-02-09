@@ -27,6 +27,45 @@
             <artifactId>nyarpc-common</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.nya</groupId>
+            <artifactId>nyarpc-loadbalance-random</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.nya</groupId>
+            <artifactId>nyarpc-loadbalance-randomweight</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.nya</groupId>
+            <artifactId>nyarpc-loadbalance-robin</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.nya</groupId>
+            <artifactId>nyarpc-loadbalance-robinweight</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.nya</groupId>
+            <artifactId>nyarpc-loadbalance-hash</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.nya</groupId>
+            <artifactId>nyarpc-loadbalance-hashweight</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.nya</groupId>
+            <artifactId>nyarpc-loadbalance-iphash</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.nya</groupId>
+            <artifactId>nyarpc-loadbalance-zookeeper</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 </project>

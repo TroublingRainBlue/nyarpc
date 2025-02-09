@@ -34,6 +34,7 @@
         <module>nyarpc-loadbalance/nyarpc-loadbalance-hash</module>
         <module>nyarpc-loadbalance/nyarpc-loadbalance-hashweight</module>
         <module>nyarpc-loadbalance/nyarpc-loadbalance-iphash</module>
+        <module>nyarpc-loadbalance/nyarpc-loadbalance-zookeeper</module>
     </modules>
 
     <properties>
