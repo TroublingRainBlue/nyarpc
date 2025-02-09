@@ -29,6 +29,7 @@
         <module>nyarpc-proxy/nyarpc-proxy-javaassist</module>
         <module>nyarpc-reflect</module>
         <module>nyarpc-loadbalance/nyarpc-loadbalance-randomweight</module>
+        <module>nyarpc-loadbalance/nyarpc-loadbalance-robin</module>
     </modules>
 
     <properties>

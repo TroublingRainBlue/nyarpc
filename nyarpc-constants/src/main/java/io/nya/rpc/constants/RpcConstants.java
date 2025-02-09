@@ -33,4 +33,6 @@ public class RpcConstants {
     public static final String LOADBALANCE_RANDOM = "random";
     // 加权随机负载均衡策略
     public static final String LOADBALANCE_RANDOM_WEIGHT = "randomweight";
+    // 轮询负载均衡策略
+    public static final String LOADBALANCE_ROBIN = "robin";
 }
