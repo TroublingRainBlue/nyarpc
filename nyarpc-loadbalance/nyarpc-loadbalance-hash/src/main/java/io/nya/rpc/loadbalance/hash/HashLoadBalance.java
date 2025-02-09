@@ -12,7 +12,7 @@ public class HashLoadBalance<T> implements LoadBalance<T> {
 
     private final Logger logger = LoggerFactory.getLogger(HashLoadBalance.class);
     @Override
-    public T select(List<T> serviceList, int hashcode) {
+    public T select(List<T> serviceList, int hashcode, String ip) {
         logger.info("基于Hash的负载均衡策略...");
         if(serviceList == null || serviceList.isEmpty()) {
             return null;

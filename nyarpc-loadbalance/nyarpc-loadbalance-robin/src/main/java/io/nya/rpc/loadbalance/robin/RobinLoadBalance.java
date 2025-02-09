@@ -14,7 +14,7 @@ public class RobinLoadBalance<T> implements LoadBalance<T> {
     private AtomicInteger cur = new AtomicInteger(0);
 
     @Override
-    public T select(List<T> serviceList, int hashcode) {
+    public T select(List<T> serviceList, int hashcode, String ip) {
         logger.info("基于轮询的负载均衡策略...");
         if(serviceList == null || serviceList.isEmpty()) {
             return null;

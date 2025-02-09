@@ -7,6 +7,7 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.nya.rpc.common.helper.RpcServiceHelper;
+import io.nya.rpc.common.utils.IpUtils;
 import io.nya.rpc.consumer.handler.RpcConsumerHandler;
 import io.nya.rpc.consumer.helper.RpcConsumerHandlerHelper;
 import io.nya.rpc.consumer.initializer.RpcConsumerInitializer;
@@ -27,12 +28,13 @@ public class RpcConsumer implements Consumer {
     private static final Logger logger = LoggerFactory.getLogger(RpcConsumer.class);
     private final Bootstrap bootstrap;
     private final EventLoopGroup group;
-
+    private final String localip;
     private static volatile RpcConsumer instance;
     private RpcConsumer() {
         bootstrap = new Bootstrap();
         group = new NioEventLoopGroup(4);
         bootstrap.group(group).channel(NioSocketChannel.class).handler(new RpcConsumerInitializer());
+        localip = IpUtils.getLocalHostIp();
     }
     // 实现单例模式
     public static RpcConsumer getInstance() {
@@ -57,7 +59,7 @@ public class RpcConsumer implements Consumer {
         String serviceKey = RpcServiceHelper.buildStringKey(request.getClassName(), request.getVersion(), request.getGroup());
         Object[] params = request.getParams();
         int invokHashCode = (params == null || params.length <= 0) ? serviceKey.hashCode() : params[0].hashCode();
-        ServiceMetaData serviceMetaData = registryService.discover(serviceKey, invokHashCode);
+        ServiceMetaData serviceMetaData = registryService.discover(serviceKey, invokHashCode, localip);
         if(serviceMetaData != null) {
             RpcConsumerHandler handler = RpcConsumerHandlerHelper.get(serviceMetaData);
             // 缓存中没有ClientHandler

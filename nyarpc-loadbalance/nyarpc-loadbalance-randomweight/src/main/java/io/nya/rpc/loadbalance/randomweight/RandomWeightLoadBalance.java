@@ -13,7 +13,7 @@ import java.util.Random;
 public class RandomWeightLoadBalance<T> implements LoadBalance<T> {
     private final Logger logger = LoggerFactory.getLogger(RandomWeightLoadBalance.class);
     @Override
-    public T select(List<T> servers, int hashCode) {
+    public T select(List<T> servers, int hashCode, String ip) {
         logger.info("基于加权随机算法的负载均衡策略...");
         if (servers == null || servers.isEmpty()){
             return null;

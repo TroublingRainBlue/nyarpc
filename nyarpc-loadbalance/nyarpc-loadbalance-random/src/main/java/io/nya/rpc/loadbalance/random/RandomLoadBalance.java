@@ -13,7 +13,7 @@ public class RandomLoadBalance<T> implements LoadBalance<T> {
     private final static Logger logger = LoggerFactory.getLogger(RandomLoadBalance.class);
 
     @Override
-    public T select(List<T> serviceList, int hashcode) {
+    public T select(List<T> serviceList, int hashcode, String ip) {
         logger.info("基于随机算法的负载均衡");
 
         if(serviceList == null || serviceList.isEmpty()) {

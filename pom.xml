@@ -33,6 +33,7 @@
         <module>nyarpc-loadbalance/nyarpc-loadbalance-robinweight</module>
         <module>nyarpc-loadbalance/nyarpc-loadbalance-hash</module>
         <module>nyarpc-loadbalance/nyarpc-loadbalance-hashweight</module>
+        <module>nyarpc-loadbalance/nyarpc-loadbalance-iphash</module>
     </modules>
 
     <properties>
