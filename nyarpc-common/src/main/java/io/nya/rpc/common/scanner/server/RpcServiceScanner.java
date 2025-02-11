@@ -3,6 +3,7 @@ package io.nya.rpc.common.scanner.server;
 import io.nya.rpc.annotation.RpcService;
 import io.nya.rpc.common.helper.RpcServiceHelper;
 import io.nya.rpc.common.scanner.ClassScanner;
+import io.nya.rpc.constants.RpcConstants;
 import io.nya.rpc.protocol.meta.ServiceMetaData;
 import io.nya.rpc.registry.api.RegistryService;
 import org.slf4j.Logger;
@@ -41,7 +42,7 @@ public class RpcServiceScanner extends ClassScanner {
                     // 优先使用interfaceClass,interfaceClass的name为空，再使用interfaceClassName
                     String serviceName = getServiceName(rpcService);
                     // 向注册中心注册服务元数据
-                    ServiceMetaData serviceMetaData = new ServiceMetaData(serviceName, rpcService.version(), host, port, rpcService.group());
+                    ServiceMetaData serviceMetaData = new ServiceMetaData(serviceName, rpcService.version(), host, port, rpcService.group(), getWeight(rpcService.weight()));
                     registryService.registry(serviceMetaData);
                     String key = RpcServiceHelper.buildStringKey(serviceName,rpcService.version(), rpcService.group());
                     handlerMap.put(key, clazz.newInstance());
@@ -64,5 +65,11 @@ public class RpcServiceScanner extends ClassScanner {
             serviceName = rpcService.interfaceClassName();
         }
         return serviceName;
+    }
+
+    private static int getWeight(int weight) {
+        if(weight > RpcConstants.MAX_WEIGHT) weight = RpcConstants.MAX_WEIGHT;
+        else if(weight < RpcConstants.MIN_WEIGHT) weight = RpcConstants.MIN_WEIGHT;
+        return weight;
     }
 }

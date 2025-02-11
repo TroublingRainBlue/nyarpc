@@ -10,7 +10,7 @@
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
-    <artifactId>nyarpc-loadbalance-api</artifactId>
+    <artifactId>nyarpc-loadbalance-randomweight-enhance</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -20,27 +20,8 @@
     <dependencies>
         <dependency>
             <groupId>org.nya</groupId>
-            <artifactId>nyarpc-spi</artifactId>
+            <artifactId>nyarpc-loadbalance-api</artifactId>
             <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.nya</groupId>
-            <artifactId>nyarpc-constants</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.curator</groupId>
-            <artifactId>curator-x-discovery</artifactId>
-            <version>4.3.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.nya</groupId>
-            <artifactId>nyarpc-protocol</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
         </dependency>
     </dependencies>
-
 </project>

@@ -35,4 +35,9 @@ public @interface RpcService {
      * 服务分组
      */
     String group() default "";
+
+    /**
+     * 服务权重
+     */
+    int weight() default 0;
 }

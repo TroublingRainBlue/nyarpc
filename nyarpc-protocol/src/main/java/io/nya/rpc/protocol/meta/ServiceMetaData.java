@@ -6,7 +6,7 @@ import java.io.Serializable;
  * 服务元数据，注册中心与提供者消费者交换的信息
  */
 public class ServiceMetaData implements Serializable {
-    private final static long serialVersionUID=6289735590272020366L;
+    private final static long serialVersionUID = 6289735590272020366L;
 
     /**
      * 服务名称
@@ -33,14 +33,25 @@ public class ServiceMetaData implements Serializable {
      */
     private String serviceGroup;
 
-    public ServiceMetaData(){}
+    /**
+     * 服务权重
+     */
+    private int weight;
 
-    public ServiceMetaData(String serviceName, String serviceVersion, String serviceAddr, int servicePort, String serviceGroup) {
+    public ServiceMetaData() {
+    }
+
+    public ServiceMetaData(String serviceName, String serviceVersion, String serviceAddr, int servicePort, String serviceGroup, int weight) {
         this.serviceGroup = serviceGroup;
         this.servicePort = servicePort;
         this.serviceAddr = serviceAddr;
         this.serviceVersion = serviceVersion;
         this.serviceName = serviceName;
+        this.weight = weight;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
     }
 
     public void setServiceGroup(String serviceGroup) {
@@ -81,5 +92,9 @@ public class ServiceMetaData implements Serializable {
 
     public int getServicePort() {
         return servicePort;
+    }
+
+    public int getWeight() {
+        return weight;
     }
 }

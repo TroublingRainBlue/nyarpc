@@ -45,4 +45,10 @@ public class RpcConstants {
     public static final String LOADBALANCE_IP_HASH = "iphash";
     // 基于zookeeper的一致性Hash 负载均衡策略
     public static final String LOADBALANCE_ZK_CONSISTEN_HASH = "zkconsistenhash";
+    // 基于增强型加权随机负载均衡策略
+    public static final String LOADBALANCE_RANDOM_WEIGHT_ENHANCE = "randomweightenhance";
+    // 服务权重最大值
+    public static final int MAX_WEIGHT = 100;
+    // 服务权重最小值
+    public static final int MIN_WEIGHT = 0;
 }

@@ -2,6 +2,7 @@ package io.nya.rpc.registry.zookeeper;
 
 import io.nya.rpc.common.helper.RpcServiceHelper;
 import io.nya.rpc.loadbalance.api.LoadBalance;
+import io.nya.rpc.loadbalance.api.helper.ServiceMetaListHelper;
 import io.nya.rpc.protocol.meta.ServiceMetaData;
 import io.nya.rpc.registry.api.RegistryService;
 import io.nya.rpc.registry.api.config.RegistryConfig;
@@ -49,11 +50,7 @@ public class ZookeeperRegistryService implements RegistryService {
     @Override
     public ServiceMetaData discover(String serviceName, int invokeHashCode, String ip) throws Exception {
         Collection<ServiceInstance<ServiceMetaData>> serviceInstances = serviceDiscovery.queryForInstances(serviceName);
-        ServiceInstance<ServiceMetaData> instance = (ServiceInstance<ServiceMetaData>) loadBalance.select((List<ServiceInstance<ServiceMetaData>>) serviceInstances, invokeHashCode, ip);
-        if(instance == null) {
-            return null;
-        }
-        return instance.getPayload();
+        return (ServiceMetaData) loadBalance.select(ServiceMetaListHelper.getServiceMetaList((List<ServiceInstance<ServiceMetaData>>) serviceInstances), invokeHashCode, ip);
     }
 
     @Override

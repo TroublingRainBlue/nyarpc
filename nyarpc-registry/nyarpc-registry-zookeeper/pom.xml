@@ -67,5 +67,10 @@
             <artifactId>nyarpc-loadbalance-zookeeper</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>org.nya</groupId>
+            <artifactId>nyarpc-loadbalance-randomweight-enhance</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 </project>
